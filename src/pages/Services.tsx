@@ -1,5 +1,6 @@
 import { Video, Youtube, Film, Edit, Wand2, BarChart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const services = [
   {
@@ -43,9 +44,42 @@ const services = [
 const Services = () => {
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Initialize parallax effect for decorative elements
+    const handleMouseMove = (e: MouseEvent) => {
+      const decorations = document.querySelectorAll('.decoration');
+      const mouseX = e.clientX / window.innerWidth;
+      const mouseY = e.clientY / window.innerHeight;
+
+      decorations.forEach((el) => {
+        const speed = parseFloat((el as HTMLElement).dataset.speed || "0.05");
+        const x = (window.innerWidth * mouseX * speed);
+        const y = (window.innerHeight * mouseY * speed);
+        (el as HTMLElement).style.transform = `translate(${x}px, ${y}px)`;
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
   return (
-    <div className="min-h-screen pt-16 bg-[#1A1F2C]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div className="min-h-screen bg-[#1A1F2C] pt-16 relative overflow-hidden">
+      {/* Abstract Decorations */}
+      <div className="decoration absolute top-20 left-10 w-64 h-64 rounded-full bg-purple-500/5 blur-3xl" data-speed="0.05" />
+      <div className="decoration absolute top-40 right-20 w-96 h-96 rounded-full bg-blue-500/5 blur-3xl" data-speed="0.08" />
+      <div className="decoration absolute bottom-20 left-1/4 w-72 h-72 rounded-full bg-pink-500/5 blur-3xl" data-speed="0.06" />
+      
+      {/* Animated Lines */}
+      <div className="absolute top-0 left-10 w-[1px] h-full bg-gradient-to-b from-purple-500/20 to-transparent" />
+      <div className="absolute top-0 right-10 w-[1px] h-full bg-gradient-to-b from-purple-500/20 to-transparent" />
+      
+      {/* Floating Elements */}
+      <div className="absolute top-40 left-20 w-4 h-4 rounded-full bg-purple-400/20 animate-pulse" />
+      <div className="absolute bottom-40 right-20 w-6 h-6 rounded-full bg-blue-400/20 animate-pulse" />
+      <div className="absolute top-1/2 right-1/3 w-3 h-3 rounded-full bg-pink-400/20 animate-pulse" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">Our Services</h1>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
@@ -57,7 +91,7 @@ const Services = () => {
           {services.map((service) => (
             <div
               key={service.id}
-              className="p-6 rounded-lg border border-purple-500/20 hover:border-purple-500/40 transition-colors group cursor-pointer"
+              className="p-6 rounded-lg border border-purple-500/20 hover:border-purple-500/40 transition-colors group cursor-pointer bg-[#232836]/50 backdrop-blur-sm"
               onClick={() => navigate(`/services/${service.id}`)}
             >
               <div className="text-purple-400 mb-4 transform group-hover:scale-110 transition-transform">
