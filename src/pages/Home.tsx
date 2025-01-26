@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/carousel";
 import { allVideos } from "@/data/creators";
 import { useEffect, useState } from "react";
+import { contentTypes, CAROUSEL_INTERVAL, type ContentType } from "@/data/content-types";
 
 const features = [
   {
@@ -36,6 +37,7 @@ const features = [
 
 const Home = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [currentContentIndex, setCurrentContentIndex] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,6 +58,16 @@ const Home = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentContentIndex((prev) => (prev + 1) % contentTypes.length);
+    }, CAROUSEL_INTERVAL);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const currentContent = contentTypes[currentContentIndex];
+
   return (
     <div className="min-h-screen bg-[#1A1F2C]">
       {/* Scroll Progress Indicator */}
@@ -73,16 +85,31 @@ const Home = () => {
       <div className="gradient-line" style={{ left: '10%' }} />
       <div className="gradient-line" style={{ right: '10%' }} />
 
-      {/* Hero Section */}
-      <div className="hero-gradient min-h-[80vh] flex items-center justify-center text-white">
+      {/* Hero Section with Vertical Content Carousel */}
+      <div className="hero-gradient min-h-[80vh] flex items-center justify-center text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Level Up Your
             <br />
-            <span className="text-purple-400">YouTube Content</span>
+            <div className="h-[60px] overflow-hidden relative">
+              <div 
+                className="transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateY(-${currentContentIndex * 60}px)` }}
+              >
+                {contentTypes.map((type) => (
+                  <div 
+                    key={type.id}
+                    className={`h-[60px] flex items-center text-${type.color}`}
+                  >
+                    <span className="mr-2">{type.icon}</span>
+                    {type.title}
+                  </div>
+                ))}
+              </div>
+            </div>
           </h1>
-          <p className="text-lg md:text-xl mb-8 max-w-2xl text-gray-300">
-            Professional video editing services tailored for content creators. We help you create engaging content that stands out.
+          <p className="text-lg md:text-xl mb-8 max-w-2xl text-gray-300 animate-fade-in">
+            {currentContent.description}
           </p>
           <Link
             to="/services"
