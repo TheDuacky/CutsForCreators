@@ -89,18 +89,18 @@ const Home = () => {
           <Carousel className="w-full">
             <CarouselContent>
               {allVideos.map((video, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pt-10">
                   <div className="relative">
                     {/* Avatar positioned to overlap */}
-                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 z-10">
-                      <Avatar className="w-16 h-16 border-4 border-[#1A1F2C]">
+                    <div className="absolute left-1/2 -translate-x-1/2 -top-10 z-10">
+                      <Avatar className="w-20 h-20 border-4 border-[#1A1F2C]">
                         <AvatarImage src={video.creator.image} alt={video.creator.name} />
                         <AvatarFallback>{video.creator.name[0]}</AvatarFallback>
                       </Avatar>
                     </div>
                     
                     {/* Card content */}
-                    <div className="pt-10 bg-black/20 rounded-lg overflow-hidden">
+                    <div className="pt-12 bg-black/20 rounded-lg overflow-hidden">
                       {/* Creator info */}
                       <div className="text-center px-4 pb-4">
                         <h3 className="text-lg font-semibold text-white">{video.creator.name}</h3>
@@ -108,13 +108,13 @@ const Home = () => {
                       </div>
                       
                       {/* Video thumbnail with hover effect */}
-                      <div className="relative group">
+                      <div className="relative">
                         <img 
                           src={video.thumbnail} 
                           alt={video.title}
-                          className="w-full aspect-video object-cover transition-transform group-hover:scale-105"
+                          className="w-full aspect-video object-cover"
                         />
-                        <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div className="absolute inset-0 bg-black/60 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center">
                           <div className="text-center p-4">
                             <h4 className="text-white font-semibold mb-2">{video.title}</h4>
                             <p className="text-gray-300">{video.views}</p>
