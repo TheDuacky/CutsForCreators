@@ -40,6 +40,7 @@ const Home = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentContentIndex, setCurrentContentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [totalRotations, setTotalRotations] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -64,11 +65,20 @@ const Home = () => {
     if (isPaused) return;
 
     const interval = setInterval(() => {
-      setCurrentContentIndex((prev) => (prev + 1) % contentTypes.length);
-    }, CAROUSEL_INTERVAL);
+      setCurrentContentIndex((prev) => {
+        const nextIndex = (prev + 1) % contentTypes.length;
+        if (nextIndex === 0) {
+          setTotalRotations(r => r + 1);
+        }
+        return nextIndex;
+      });
+    }, CAROUSEL_INTERVAL / 2);
 
     return () => clearInterval(interval);
   }, [isPaused]);
+
+  // Get the current content for description
+  const currentDescription = contentTypes[currentContentIndex].description;
 
   return (
     <div className="min-h-screen bg-[#1A1F2C]">
@@ -87,23 +97,24 @@ const Home = () => {
       <div className="gradient-line" style={{ left: '10%' }} />
       <div className="gradient-line" style={{ right: '10%' }} />
 
-      {/* Hero Section */}
+      {/* Hero Section with Vertical Content Carousel */}
       <div className="hero-gradient min-h-[80vh] flex items-center justify-center text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Level Up Your
             <br />
-            <div className="h-[100px] relative overflow-hidden">
+            <div className="min-h-[100px] relative overflow-visible">
               <div 
-                className="absolute left-0 transition-transform duration-500 ease-in-out"
+                className="transform transition-transform duration-500 ease-in-out absolute left-0 whitespace-nowrap"
                 style={{ 
                   transform: `translateY(-${currentContentIndex * 100}px)`,
+                  transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
               >
                 {contentTypes.map((type, index) => (
                   <div 
                     key={type.id}
-                    className="h-[100px] flex items-center text-purple-400"
+                    className="min-h-[100px] flex items-center text-purple-400"
                   >
                     {type.title}
                   </div>
@@ -112,7 +123,7 @@ const Home = () => {
             </div>
           </h1>
           <p className="text-lg md:text-xl mb-8 max-w-2xl text-gray-300 animate-fade-in">
-            {contentTypes[currentContentIndex].description}
+            {currentDescription}
           </p>
           <Link
             to="/services"
