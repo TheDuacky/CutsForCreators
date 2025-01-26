@@ -1,4 +1,4 @@
-import { ArrowRight, Youtube, Award, Clock, Sparkles } from "lucide-react";
+import { ArrowRight, Youtube, Award, Clock, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -126,8 +126,12 @@ const Home = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="bg-purple-500 hover:bg-purple-600 text-white border-none transition-colors" />
-            <CarouselNext className="bg-purple-500 hover:bg-purple-600 text-white border-none transition-colors" />
+            <CarouselPrevious className="bg-purple-500 hover:bg-purple-600 text-white border-none transition-colors">
+              <ChevronLeft className="h-6 w-6" />
+            </CarouselPrevious>
+            <CarouselNext className="bg-purple-500 hover:bg-purple-600 text-white border-none transition-colors">
+              <ChevronRight className="h-6 w-6" />
+            </CarouselNext>
           </Carousel>
         </div>
       </div>
