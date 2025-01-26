@@ -40,6 +40,7 @@ const Home = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentContentIndex, setCurrentContentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [totalRotations, setTotalRotations] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,8 +67,9 @@ const Home = () => {
     const interval = setInterval(() => {
       setCurrentContentIndex((prev) => {
         const nextIndex = prev + 1;
-        // When we reach the end, immediately reset to first item
+        // When we reach the end, increment total rotations and continue from first item
         if (nextIndex >= contentTypes.length + 1) {
+          setTotalRotations(r => r + 1);
           return 0;
         }
         return nextIndex;
@@ -81,6 +83,9 @@ const Home = () => {
   const currentDescription = currentContentIndex < contentTypes.length 
     ? contentTypes[currentContentIndex].description 
     : contentTypes[0].description;
+
+  // Calculate the total offset based on current index and total rotations
+  const totalOffset = (totalRotations * (contentTypes.length + 1) + currentContentIndex) * 60;
 
   return (
     <div className="min-h-screen bg-[#1A1F2C]">
@@ -109,7 +114,7 @@ const Home = () => {
               <div 
                 className="transform transition-transform duration-500 ease-in-out"
                 style={{ 
-                  transform: `translateY(-${currentContentIndex * 60}px)`,
+                  transform: `translateY(-${totalOffset}px)`,
                   transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
               >
