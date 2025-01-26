@@ -81,7 +81,7 @@ const Home = () => {
   const currentDescription = contentTypes[currentContentIndex].description;
 
   // Calculate the total offset based on current index and total rotations
-  const totalOffset = (totalRotations * contentTypes.length + currentContentIndex) * 80;
+  const totalOffset = (totalRotations * contentTypes.length + currentContentIndex) * 100;
 
   return (
     <div className="min-h-screen bg-[#1A1F2C]">
@@ -106,7 +106,7 @@ const Home = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Level Up Your
             <br />
-            <div className="h-[80px] relative overflow-hidden">
+            <div className="h-[100px] relative overflow-hidden">
               <div 
                 className="transform transition-transform duration-500 ease-in-out absolute"
                 style={{ 
@@ -118,7 +118,7 @@ const Home = () => {
                   contentTypes.map((type) => (
                     <div 
                       key={`${type.id}-${rotation}`}
-                      className="h-[80px] flex items-center text-purple-400"
+                      className="h-[100px] flex items-center text-purple-400"
                     >
                       {type.title}
                     </div>
