@@ -1,4 +1,4 @@
-import { ArrowRight, Youtube, Award, Clock, Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, Youtube, Award, Clock, Sparkles, ChevronLeft, ChevronRight, Pause, Play } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -11,6 +11,7 @@ import {
 import { allVideos } from "@/data/creators";
 import { useEffect, useState } from "react";
 import { contentTypes, CAROUSEL_INTERVAL, type ContentType } from "@/data/content-types";
+import { Button } from "@/components/ui/button";
 
 const features = [
   {
@@ -38,6 +39,7 @@ const features = [
 const Home = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentContentIndex, setCurrentContentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,12 +61,24 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    if (isPaused) return;
+
     const interval = setInterval(() => {
-      setCurrentContentIndex((prev) => (prev + 1) % contentTypes.length);
+      setCurrentContentIndex((prev) => {
+        // Calculate next index, if at end, move all items up instantly
+        if (prev === contentTypes.length - 1) {
+          // Use setTimeout to create a micro-delay before resetting
+          setTimeout(() => {
+            setCurrentContentIndex(0);
+          }, 0);
+          return prev;
+        }
+        return prev + 1;
+      });
     }, CAROUSEL_INTERVAL);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isPaused]);
 
   const currentContent = contentTypes[currentContentIndex];
 
@@ -87,14 +101,19 @@ const Home = () => {
 
       {/* Hero Section with Vertical Content Carousel */}
       <div className="hero-gradient min-h-[80vh] flex items-center justify-center text-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Level Up Your
             <br />
             <div className="h-[80px] overflow-hidden relative">
               <div 
                 className="transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateY(-${currentContentIndex * 80}px)` }}
+                style={{ 
+                  transform: `translateY(-${currentContentIndex * 80}px)`,
+                  ...(currentContentIndex === contentTypes.length - 1 && {
+                    transition: 'none'
+                  })
+                }}
               >
                 {contentTypes.map((type) => (
                   <div 
@@ -116,6 +135,16 @@ const Home = () => {
           >
             Our Services <ArrowRight className="ml-2" />
           </Link>
+
+          {/* Pause/Play Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setIsPaused(!isPaused)}
+            className="absolute bottom-4 right-4 text-purple-400 hover:text-purple-300 hover:bg-purple-500/10"
+          >
+            {isPaused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
+          </Button>
         </div>
       </div>
 
