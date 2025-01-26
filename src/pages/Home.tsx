@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/carousel";
 import { allVideos } from "@/data/creators";
 import { useEffect, useState } from "react";
+import { contentTypes, CAROUSEL_TIMING, type ContentType } from "@/data/content-types";
 
 const features = [
   {
@@ -35,7 +36,18 @@ const features = [
 ];
 
 const Home = () => {
+  const [activeContentType, setActiveContentType] = useState<ContentType>(contentTypes[0]);
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const currentIndex = contentTypes.findIndex(type => type.id === activeContentType.id);
+      const nextIndex = (currentIndex + 1) % contentTypes.length;
+      setActiveContentType(contentTypes[nextIndex]);
+    }, CAROUSEL_TIMING);
+
+    return () => clearInterval(interval);
+  }, [activeContentType]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -110,6 +122,77 @@ const Home = () => {
               <p className="text-gray-300">{feature.description}</p>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Content Types Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Content Types</h2>
+          <p className="text-gray-300 max-w-2xl mx-auto">
+            We specialize in various types of content creation and editing
+          </p>
+        </div>
+        
+        <div className="relative px-12">
+          <Carousel
+            opts={{
+              axis: 'y',
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-mt-4 h-[600px]">
+              {contentTypes.map((contentType, index) => (
+                <CarouselItem 
+                  key={contentType.id}
+                  className={`pt-4 transition-opacity duration-500 ${
+                    contentType.id === activeContentType.id ? 'opacity-100' : 'opacity-0'
+                  }`}
+                >
+                  <div className="p-8 rounded-2xl bg-purple-500/10 border border-purple-500/20">
+                    <div className="flex items-center mb-6">
+                      <span className="text-4xl mr-4">{contentType.icon}</span>
+                      <div>
+                        <h3 className="text-2xl font-bold text-white">{contentType.name}</h3>
+                        <p className="text-gray-300">{contentType.description}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {contentType.examples.map((example, idx) => (
+                        <div 
+                          key={idx}
+                          className="group relative overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105"
+                        >
+                          <img 
+                            src={example.thumbnail} 
+                            alt={example.title}
+                            className="w-full h-48 object-cover"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-4 flex flex-col justify-end">
+                            <h4 className="text-white font-semibold mb-1">{example.title}</h4>
+                            <p className="text-gray-300 text-sm">{example.views}</p>
+                            <div className="flex items-center mt-2">
+                              <img 
+                                src={example.creator.image} 
+                                alt={example.creator.name}
+                                className="w-6 h-6 rounded-full mr-2"
+                              />
+                              <div>
+                                <p className="text-white text-sm">{example.creator.name}</p>
+                                <p className="text-gray-300 text-xs">{example.creator.subscribers}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
       </div>
 
