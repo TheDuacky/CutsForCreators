@@ -91,7 +91,6 @@ const Home = () => {
               {allVideos.map((video, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pt-12">
                   <div className="relative group">
-                    {/* Avatar positioned to overlap */}
                     <div className="absolute left-1/2 -translate-x-1/2 -top-12 z-10">
                       <Avatar className="w-24 h-24 border-4 border-[#1A1F2C] shadow-lg">
                         <AvatarImage src={video.creator.image} alt={video.creator.name} />
@@ -99,15 +98,12 @@ const Home = () => {
                       </Avatar>
                     </div>
                     
-                    {/* Card content */}
                     <div className="pt-16 rounded-2xl overflow-hidden bg-purple-500/20 border border-purple-500/20 shadow-xl transition-all duration-300 group-hover:scale-[1.02] group-hover:bg-purple-500/30">
-                      {/* Creator info */}
                       <div className="text-center px-6 pb-6">
                         <h3 className="text-xl font-semibold text-white mb-1">{video.creator.name}</h3>
                         <p className="text-purple-400">{video.creator.subscribers}</p>
                       </div>
                       
-                      {/* Video thumbnail with hover effect */}
                       <div className="relative aspect-video">
                         <img 
                           src={video.thumbnail} 
