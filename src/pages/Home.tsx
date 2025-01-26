@@ -108,7 +108,7 @@ const Home = () => {
             <br />
             <div className="h-[100px] relative overflow-hidden">
               <div 
-                className="transform transition-transform duration-500 ease-in-out absolute"
+                className="transform transition-transform duration-500 ease-in-out absolute w-full"
                 style={{ 
                   transform: `translateY(-${totalOffset}px)`,
                   transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
@@ -118,7 +118,7 @@ const Home = () => {
                   contentTypes.map((type) => (
                     <div 
                       key={`${type.id}-${rotation}`}
-                      className="h-[100px] flex items-center text-purple-400"
+                      className="h-[100px] flex items-center justify-start text-purple-400 py-4"
                     >
                       {type.title}
                     </div>
