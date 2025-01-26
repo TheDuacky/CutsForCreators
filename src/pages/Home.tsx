@@ -40,7 +40,6 @@ const Home = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentContentIndex, setCurrentContentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [isResetting, setIsResetting] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -66,28 +65,12 @@ const Home = () => {
 
     const interval = setInterval(() => {
       setCurrentContentIndex((prev) => {
-        // When we reach the duplicate (length), reset to first item
-        if (prev >= contentTypes.length) {
-          setIsResetting(true);
-          
-          // Reset to first item after animation completes
-          setTimeout(() => {
-            setCurrentContentIndex(0);
-            requestAnimationFrame(() => {
-              setIsResetting(false);
-            });
-          }, 250); // Keep at 250ms for fast reset
-          
-          return prev;
+        const nextIndex = prev + 1;
+        // When we reach the end, immediately reset to first item
+        if (nextIndex >= contentTypes.length + 1) {
+          return 0;
         }
-
-        // If it's the first or last item (Video Essays), move faster
-        const isVideoEssays = prev === 0 || prev === contentTypes.length;
-        const nextUpdate = setTimeout(() => {
-          return prev + 1;
-        }, isVideoEssays ? CAROUSEL_INTERVAL / 4 : CAROUSEL_INTERVAL / 2);
-
-        return prev + 1;
+        return nextIndex;
       });
     }, CAROUSEL_INTERVAL / 2);
 
@@ -124,8 +107,11 @@ const Home = () => {
             <br />
             <div className="h-[60px] overflow-hidden relative">
               <div 
-                className={`transform transition-transform duration-500 ease-in-out ${isResetting ? 'duration-0' : ''}`}
-                style={{ transform: `translateY(-${currentContentIndex * 60}px)` }}
+                className="transform transition-transform duration-500 ease-in-out"
+                style={{ 
+                  transform: `translateY(-${currentContentIndex * 60}px)`,
+                  transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
+                }}
               >
                 {contentTypes.map((type) => (
                   <div 
