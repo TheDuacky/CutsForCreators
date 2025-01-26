@@ -80,6 +80,9 @@ const Home = () => {
   // Get the current content for description
   const currentDescription = contentTypes[currentContentIndex].description;
 
+  // Calculate the total offset based on current index and total rotations
+  const totalOffset = (totalRotations * contentTypes.length + currentContentIndex) * 100;
+
   return (
     <div className="min-h-screen bg-[#1A1F2C]">
       {/* Scroll Progress Indicator */}
@@ -105,19 +108,21 @@ const Home = () => {
             <br />
             <div className="min-h-[100px] relative overflow-visible">
               <div 
-                className="transform transition-transform duration-500 ease-in-out absolute left-0 whitespace-nowrap"
+                className="transform transition-transform duration-500 ease-in-out absolute left-0"
                 style={{ 
-                  transform: `translateY(-${currentContentIndex * 100}px)`,
+                  transform: `translateY(-${totalOffset}px)`,
                   transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
               >
-                {contentTypes.map((type, index) => (
-                  <div 
-                    key={type.id}
-                    className="min-h-[100px] flex items-center text-purple-400"
-                  >
-                    {type.title}
-                  </div>
+                {[...Array(totalRotations + 2)].map((_, rotation) => (
+                  contentTypes.map((type) => (
+                    <div 
+                      key={`${type.id}-${rotation}`}
+                      className="min-h-[100px] flex items-center text-purple-400 whitespace-nowrap"
+                    >
+                      {type.title}
+                    </div>
+                  ))
                 ))}
               </div>
             </div>
