@@ -172,32 +172,32 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Worked With Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Worked With</h2>
+      {/* Worked With Section - More Compact Layout */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold mb-2 text-white">Worked With</h2>
           <p className="text-gray-300 max-w-2xl mx-auto">
             Trusted by leading content creators across various niches
           </p>
         </div>
 
-        <div className="relative px-12 pb-8">
+        <div className="relative px-8">
           <Carousel className="w-full">
             <CarouselContent>
               {allVideos.map((video, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pt-12 pb-4">
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pt-8 pb-2">
                   <div className="relative group">
-                    <div className="absolute left-1/2 -translate-x-1/2 -top-12 z-10">
-                      <Avatar className="w-24 h-24 border-4 border-[#1A1F2C] shadow-lg">
+                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 z-10">
+                      <Avatar className="w-16 h-16 border-2 border-[#1A1F2C] shadow-lg">
                         <AvatarImage src={video.creator.image} alt={video.creator.name} />
                         <AvatarFallback>{video.creator.name[0]}</AvatarFallback>
                       </Avatar>
                     </div>
                     
-                    <div className="pt-16 rounded-2xl overflow-hidden bg-purple-500/20 border border-purple-500/20 shadow-xl transition-all duration-300 group-hover:scale-[1.02] group-hover:bg-purple-500/30">
-                      <div className="text-center px-6 pb-6">
-                        <h3 className="text-xl font-semibold text-white mb-1">{video.creator.name}</h3>
-                        <p className="text-purple-400">{video.creator.subscribers}</p>
+                    <div className="pt-10 rounded-xl overflow-hidden bg-purple-500/20 border border-purple-500/20 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:bg-purple-500/30">
+                      <div className="text-center px-4 pb-3">
+                        <h3 className="text-lg font-semibold text-white mb-0.5">{video.creator.name}</h3>
+                        <p className="text-sm text-purple-400">{video.creator.subscribers}</p>
                       </div>
                       
                       <div className="relative aspect-video">
@@ -207,9 +207,9 @@ const Home = () => {
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-[#1A1F2C]/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                          <div className="text-center p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                            <h4 className="text-white font-semibold mb-2">{video.title}</h4>
-                            <p className="text-purple-400">{video.views}</p>
+                          <div className="text-center p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                            <h4 className="text-sm font-semibold text-white mb-1">{video.title}</h4>
+                            <p className="text-xs text-purple-400">{video.views}</p>
                           </div>
                         </div>
                       </div>
@@ -218,11 +218,11 @@ const Home = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="bg-purple-500 hover:bg-purple-600 text-white border-none transition-colors">
-              <ChevronLeft className="h-6 w-6" />
+            <CarouselPrevious className="bg-purple-500 hover:bg-purple-600 text-white border-none transition-colors -left-2">
+              <ChevronLeft className="h-4 w-4" />
             </CarouselPrevious>
-            <CarouselNext className="bg-purple-500 hover:bg-purple-600 text-white border-none transition-colors">
-              <ChevronRight className="h-6 w-6" />
+            <CarouselNext className="bg-purple-500 hover:bg-purple-600 text-white border-none transition-colors -right-2">
+              <ChevronRight className="h-4 w-4" />
             </CarouselNext>
           </Carousel>
         </div>
