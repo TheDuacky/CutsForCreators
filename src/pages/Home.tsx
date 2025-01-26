@@ -106,7 +106,7 @@ const Home = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Level Up Your
             <br />
-            <div className="h-[60px] relative">
+            <div className="h-[60px] relative overflow-hidden">
               <div 
                 className="transform transition-transform duration-500 ease-in-out absolute"
                 style={{ 
