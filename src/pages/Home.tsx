@@ -76,13 +76,13 @@ const Home = () => {
             requestAnimationFrame(() => {
               setIsResetting(false);
             });
-          }, 500);
+          }, 250); // Reduced from 500 to 250 for faster reset
           
           return prev;
         }
         return prev + 1;
       });
-    }, CAROUSEL_INTERVAL);
+    }, CAROUSEL_INTERVAL / 2); // Divide by 2 to make each text appear for 1500ms
 
     return () => clearInterval(interval);
   }, [isPaused]);

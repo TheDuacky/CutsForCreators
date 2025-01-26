@@ -6,7 +6,7 @@ export interface ContentType {
   color: string;
 }
 
-export const CAROUSEL_INTERVAL = 1500; // Changed from 3000 to 1500 milliseconds
+export const CAROUSEL_INTERVAL = 3000; // Reset to 3000ms for smooth transitions
 
 export const contentTypes: ContentType[] = [
   {
