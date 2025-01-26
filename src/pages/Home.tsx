@@ -66,22 +66,19 @@ const Home = () => {
 
     const interval = setInterval(() => {
       setCurrentContentIndex((prev) => {
-        if (prev === contentTypes.length - 1) {
-          // Add an extra step to move to a position below the last item
+        // When we reach the duplicate (length), reset to first item
+        if (prev >= contentTypes.length) {
           setIsResetting(true);
           
-          // Wait for the final downward animation to complete
+          // Reset to first item after animation completes
           setTimeout(() => {
-            // Reset the position without animation
             setCurrentContentIndex(0);
-            // Remove the transition after the DOM updates
             requestAnimationFrame(() => {
               setIsResetting(false);
             });
           }, 500);
           
-          // Return a temporary position that's one step further down
-          return prev + 1;
+          return prev;
         }
         return prev + 1;
       });
@@ -131,7 +128,7 @@ const Home = () => {
                     {type.title}
                   </div>
                 ))}
-                {/* Add an extra item for smooth transition */}
+                {/* Add duplicate of first item for smooth loop */}
                 <div className="h-[80px] flex items-center text-purple-400">
                   {contentTypes[0].title}
                 </div>
@@ -153,7 +150,7 @@ const Home = () => {
             variant="outline"
             size="icon"
             onClick={() => setIsPaused(!isPaused)}
-            className="absolute bottom-4 right-4 rounded-full border border-purple-400/20 bg-purple-500/10 hover:bg-purple-500/20 hover:border-purple-400/40"
+            className="absolute bottom-4 right-4 rounded-full border border-purple-400/20 bg-purple-500/10 hover:bg-purple-500/20"
           >
             {isPaused ? 
               <Play className="h-4 w-4 text-purple-400" /> : 
