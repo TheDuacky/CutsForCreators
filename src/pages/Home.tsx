@@ -1,4 +1,4 @@
-import { ArrowRight, Youtube, Award, Clock, Sparkles, Users } from "lucide-react";
+import { ArrowRight, Youtube, Award, Clock, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import {
@@ -8,6 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { allVideos } from "@/data/creators";
 
 const features = [
   {
@@ -32,78 +33,10 @@ const features = [
   }
 ];
 
-const clients = [
-  {
-    name: "Gaming Legends",
-    image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
-    subscribers: "2.5M+",
-    videos: [
-      {
-        thumbnail: "https://images.unsplash.com/photo-1542751371-adc38448a05e",
-        title: "Epic Gaming Moments 2024",
-        views: "1.2M views"
-      },
-      {
-        thumbnail: "https://images.unsplash.com/photo-1511512578047-dfb367046420",
-        title: "Gaming Setup Tour",
-        views: "800K views"
-      },
-      {
-        thumbnail: "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8",
-        title: "Best Gaming Moments",
-        views: "950K views"
-      }
-    ]
-  },
-  {
-    name: "Tech Reviews Daily",
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-    subscribers: "1M+",
-    videos: [
-      {
-        thumbnail: "https://images.unsplash.com/photo-1550745165-9bc0b252726f",
-        title: "Latest Tech Review 2024",
-        views: "500K views"
-      },
-      {
-        thumbnail: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5",
-        title: "Tech News Roundup",
-        views: "300K views"
-      },
-      {
-        thumbnail: "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-        title: "Gadget Comparison",
-        views: "400K views"
-      }
-    ]
-  },
-  {
-    name: "Creative Tutorials",
-    image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7",
-    subscribers: "800K+",
-    videos: [
-      {
-        thumbnail: "https://images.unsplash.com/photo-1536240478700-b869070f9279",
-        title: "Creative Masterclass",
-        views: "300K views"
-      },
-      {
-        thumbnail: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd",
-        title: "Tutorial Series",
-        views: "250K views"
-      },
-      {
-        thumbnail: "https://images.unsplash.com/photo-1505238680356-667803448bb6",
-        title: "Behind the Scenes",
-        views: "200K views"
-      }
-    ]
-  }
-];
-
 const Home = () => {
   return (
     <div className="min-h-screen bg-[#1A1F2C]">
+      {/* Hero Section */}
       <div className="hero-gradient min-h-[80vh] flex items-center justify-center text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
@@ -123,6 +56,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Features Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">Why Choose Us</h2>
@@ -150,51 +84,43 @@ const Home = () => {
             Trusted by leading content creators across various niches
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 gap-16">
-          {clients.map((client) => (
-            <div 
-              key={client.name}
-              className="space-y-8"
-            >
-              <div className="flex flex-col md:flex-row items-center gap-6 p-6 rounded-lg bg-black/20">
-                <Avatar className="w-24 h-24">
-                  <AvatarImage src={client.image} alt={client.name} />
-                  <AvatarFallback>{client.name[0]}</AvatarFallback>
-                </Avatar>
-                <div className="text-center md:text-left">
-                  <h3 className="text-2xl font-semibold text-white mb-2">{client.name}</h3>
-                  <p className="text-purple-400 text-lg">{client.subscribers} Subscribers</p>
-                </div>
-              </div>
 
-              <div className="relative px-8">
-                <Carousel className="w-full">
-                  <CarouselContent>
-                    {client.videos.map((video, index) => (
-                      <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                        <div className="relative group overflow-hidden rounded-lg">
-                          <img 
-                            src={video.thumbnail} 
-                            alt={video.title}
-                            className="w-full aspect-video object-cover rounded-lg transition-transform group-hover:scale-105"
-                          />
-                          <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                            <div className="text-center p-4">
-                              <h4 className="text-white font-semibold mb-2">{video.title}</h4>
-                              <p className="text-gray-300">{video.views}</p>
-                            </div>
-                          </div>
+        <div className="relative px-8">
+          <Carousel className="w-full">
+            <CarouselContent>
+              {allVideos.map((video, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-4 p-4 rounded-lg bg-black/20">
+                      <Avatar className="w-16 h-16">
+                        <AvatarImage src={video.creator.image} alt={video.creator.name} />
+                        <AvatarFallback>{video.creator.name[0]}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <h3 className="text-lg font-semibold text-white">{video.creator.name}</h3>
+                        <p className="text-purple-400">{video.creator.subscribers} Subscribers</p>
+                      </div>
+                    </div>
+                    <div className="relative group overflow-hidden rounded-lg">
+                      <img 
+                        src={video.thumbnail} 
+                        alt={video.title}
+                        className="w-full aspect-video object-cover rounded-lg transition-transform group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <div className="text-center p-4">
+                          <h4 className="text-white font-semibold mb-2">{video.title}</h4>
+                          <p className="text-gray-300">{video.views}</p>
                         </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious />
-                  <CarouselNext />
-                </Carousel>
-              </div>
-            </div>
-          ))}
+                      </div>
+                    </div>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
       </div>
     </div>
