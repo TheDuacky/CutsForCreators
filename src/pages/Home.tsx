@@ -106,23 +106,21 @@ const Home = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Level Up Your
             <br />
-            <div className="min-h-[100px] relative overflow-visible">
+            <div className="h-[100px] relative overflow-hidden"> {/* Added fixed height and overflow-hidden */}
               <div 
                 className="transform transition-transform duration-500 ease-in-out absolute left-0"
                 style={{ 
-                  transform: `translateY(-${totalOffset}px)`,
+                  transform: `translateY(-${currentContentIndex * 100}px)`,
                   transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
               >
-                {[...Array(totalRotations + 2)].map((_, rotation) => (
-                  contentTypes.map((type) => (
-                    <div 
-                      key={`${type.id}-${rotation}`}
-                      className="min-h-[100px] flex items-center text-purple-400 whitespace-nowrap"
-                    >
-                      {type.title}
-                    </div>
-                  ))
+                {contentTypes.map((type) => (
+                  <div 
+                    key={type.id}
+                    className="h-[100px] flex items-center text-purple-400 whitespace-nowrap"
+                  >
+                    {type.title}
+                  </div>
                 ))}
               </div>
             </div>
