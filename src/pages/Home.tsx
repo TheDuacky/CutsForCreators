@@ -91,17 +91,16 @@ const Home = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Level Up Your
             <br />
-            <div className="h-[60px] overflow-hidden relative">
+            <div className="h-[80px] overflow-hidden relative">
               <div 
                 className="transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateY(-${currentContentIndex * 60}px)` }}
+                style={{ transform: `translateY(-${currentContentIndex * 80}px)` }}
               >
                 {contentTypes.map((type) => (
                   <div 
                     key={type.id}
-                    className={`h-[60px] flex items-center text-${type.color}`}
+                    className="h-[80px] flex items-center text-purple-400"
                   >
-                    <span className="mr-2">{type.icon}</span>
                     {type.title}
                   </div>
                 ))}
