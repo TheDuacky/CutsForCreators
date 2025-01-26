@@ -1,3 +1,4 @@
+@import './tokens.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -37,7 +38,7 @@
 }
 
 .hero-gradient {
-  background: linear-gradient(to right, #1A1F2C, #2A2F3C);
+  background: linear-gradient(to right, var(--color-background-dark), #2A2F3C);
   position: relative;
 }
 
