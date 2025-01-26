@@ -90,6 +90,11 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [isPaused]);
 
+  // Get the current content for description
+  const currentDescription = currentContentIndex < contentTypes.length 
+    ? contentTypes[currentContentIndex].description 
+    : contentTypes[0].description;
+
   return (
     <div className="min-h-screen bg-[#1A1F2C]">
       {/* Scroll Progress Indicator */}
@@ -134,7 +139,7 @@ const Home = () => {
             </div>
           </h1>
           <p className="text-lg md:text-xl mb-8 max-w-2xl text-gray-300 animate-fade-in">
-            {currentContent?.description || contentTypes[0].description}
+            {currentDescription}
           </p>
           <Link
             to="/services"
