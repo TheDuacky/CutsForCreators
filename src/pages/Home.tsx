@@ -145,12 +145,12 @@ const Home = () => {
             Our Services <ArrowRight className="ml-2" />
           </Link>
 
-          {/* Pause/Play Button */}
+          {/* Pause/Play Button - Updated position */}
           <Button
             variant="outline"
             size="icon"
             onClick={() => setIsPaused(!isPaused)}
-            className="absolute bottom-12 right-12 rounded-full border border-purple-400/20 bg-purple-500/10 hover:bg-purple-500/20"
+            className="absolute bottom-4 right-4 rounded-full border border-purple-400/20 bg-purple-500/10 hover:bg-purple-500/20"
           >
             {isPaused ? 
               <Play className="h-4 w-4 text-purple-400" /> : 
