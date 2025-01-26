@@ -40,6 +40,7 @@ const Home = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentContentIndex, setCurrentContentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isResetting, setIsResetting] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,12 +66,16 @@ const Home = () => {
 
     const interval = setInterval(() => {
       setCurrentContentIndex((prev) => {
-        // Calculate next index, if at end, move all items up instantly
         if (prev === contentTypes.length - 1) {
-          // Use setTimeout to create a micro-delay before resetting
+          setIsResetting(true);
+          // Reset to first item after animation completes
           setTimeout(() => {
             setCurrentContentIndex(0);
-          }, 0);
+            // Wait for DOM update before removing transition
+            requestAnimationFrame(() => {
+              setIsResetting(false);
+            });
+          }, 500); // Match this with transition duration
           return prev;
         }
         return prev + 1;
@@ -107,13 +112,8 @@ const Home = () => {
             <br />
             <div className="h-[80px] overflow-hidden relative">
               <div 
-                className="transition-transform duration-500 ease-in-out"
-                style={{ 
-                  transform: `translateY(-${currentContentIndex * 80}px)`,
-                  ...(currentContentIndex === contentTypes.length - 1 && {
-                    transition: 'none'
-                  })
-                }}
+                className={`${!isResetting ? 'transition-transform duration-500 ease-in-out' : ''}`}
+                style={{ transform: `translateY(-${currentContentIndex * 80}px)` }}
               >
                 {contentTypes.map((type) => (
                   <div 
