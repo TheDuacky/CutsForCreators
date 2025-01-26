@@ -106,9 +106,9 @@ const Home = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Level Up Your
             <br />
-            <div className="h-[100px] relative overflow-hidden">
+            <div className="min-h-[100px] relative overflow-visible">
               <div 
-                className="transform transition-transform duration-500 ease-in-out absolute"
+                className="transform transition-transform duration-500 ease-in-out absolute left-0"
                 style={{ 
                   transform: `translateY(-${totalOffset}px)`,
                   transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
@@ -118,7 +118,7 @@ const Home = () => {
                   contentTypes.map((type) => (
                     <div 
                       key={`${type.id}-${rotation}`}
-                      className="h-[100px] flex items-center text-purple-400"
+                      className="min-h-[100px] flex items-center text-purple-400 whitespace-nowrap"
                     >
                       {type.title}
                     </div>
