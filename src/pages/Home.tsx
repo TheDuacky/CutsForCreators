@@ -185,17 +185,17 @@ const Home = () => {
           <Carousel className="w-full">
             <CarouselContent>
               {allVideos.map((video, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pt-8 pb-2">
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pt-6 pb-2">
                   <div className="relative group">
-                    <div className="absolute left-1/2 -translate-x-1/2 -top-8 z-10">
-                      <Avatar className="w-16 h-16 border-2 border-[#1A1F2C] shadow-lg">
+                    <div className="absolute left-1/2 -translate-x-1/2 -top-6 z-10">
+                      <Avatar className="w-12 h-12 border-2 border-[#1A1F2C] shadow-lg">
                         <AvatarImage src={video.creator.image} alt={video.creator.name} />
                         <AvatarFallback>{video.creator.name[0]}</AvatarFallback>
                       </Avatar>
                     </div>
                     
-                    <div className="pt-10 rounded-xl overflow-hidden bg-purple-500/20 border border-purple-500/20 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:bg-purple-500/30">
-                      <div className="text-center px-4 pb-3">
+                    <div className="pt-8 rounded-xl overflow-hidden bg-purple-500/20 border border-purple-500/20 shadow-lg transition-all duration-300 group-hover:scale-[1.02] group-hover:bg-purple-500/30">
+                      <div className="text-center px-4 pb-2">
                         <h3 className="text-lg font-semibold text-white mb-0.5">{video.creator.name}</h3>
                         <p className="text-sm text-purple-400">{video.creator.subscribers}</p>
                       </div>
@@ -207,7 +207,7 @@ const Home = () => {
                           className="w-full h-full object-cover"
                         />
                         <div className="absolute inset-0 bg-[#1A1F2C]/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                          <div className="text-center p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                          <div className="text-center p-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                             <h4 className="text-sm font-semibold text-white mb-1">{video.title}</h4>
                             <p className="text-xs text-purple-400">{video.views}</p>
                           </div>
@@ -232,3 +232,4 @@ const Home = () => {
 };
 
 export default Home;
+
