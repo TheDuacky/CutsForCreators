@@ -7,19 +7,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { creators } from "@/data/creators";
+import { creators, allVideos } from "@/data/creators";
 
 const Showreel = () => {
-  // Flatten all videos into a single array with creator info
-  const allVideos = creators.flatMap(creator => 
-    creator.videos.map(video => ({
-      ...video,
-      creatorName: creator.name,
-      creatorImage: creator.image,
-      subscribers: creator.subscribers
-    }))
-  );
-
   return (
     <div className="min-h-screen pt-16 bg-[#1A1F2C]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -46,20 +36,19 @@ const Showreel = () => {
                         <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-white">
                           <div className="flex items-center gap-4 mb-4">
                             <Avatar className="w-12 h-12">
-                              <AvatarImage src={video.creatorImage} alt={video.creatorName} />
-                              <AvatarFallback>{video.creatorName[0]}</AvatarFallback>
+                              <AvatarImage src={video.creator.image} alt={video.creator.name} />
+                              <AvatarFallback>{video.creator.name[0]}</AvatarFallback>
                             </Avatar>
                             <div className="text-left">
-                              <h3 className="font-semibold">{video.creatorName}</h3>
+                              <h3 className="font-semibold">{video.creator.name}</h3>
                               <div className="flex items-center text-sm text-gray-300">
                                 <Users className="w-4 h-4 mr-1" />
-                                {video.subscribers}
+                                {video.creator.subscribers}
                               </div>
                             </div>
                           </div>
                           <h4 className="text-xl font-semibold mb-2">{video.title}</h4>
                           <p className="text-gray-300 mb-2">{video.views}</p>
-                          <p className="text-sm text-gray-300 text-center">{video.description}</p>
                         </div>
                       </div>
                     </div>

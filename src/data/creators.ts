@@ -9,7 +9,7 @@ export interface Video {
   };
 }
 
-const creators = [
+export const creators = [
   {
     name: "Gaming Legends",
     image: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81",
