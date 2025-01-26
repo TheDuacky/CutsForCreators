@@ -67,16 +67,21 @@ const Home = () => {
     const interval = setInterval(() => {
       setCurrentContentIndex((prev) => {
         if (prev === contentTypes.length - 1) {
+          // Add an extra step to move to a position below the last item
           setIsResetting(true);
-          // Reset to first item after animation completes
+          
+          // Wait for the final downward animation to complete
           setTimeout(() => {
+            // Reset the position without animation
             setCurrentContentIndex(0);
-            // Wait for DOM update before removing transition
+            // Remove the transition after the DOM updates
             requestAnimationFrame(() => {
               setIsResetting(false);
             });
-          }, 500); // Match this with transition duration
-          return prev;
+          }, 500);
+          
+          // Return a temporary position that's one step further down
+          return prev + 1;
         }
         return prev + 1;
       });
@@ -84,8 +89,6 @@ const Home = () => {
 
     return () => clearInterval(interval);
   }, [isPaused]);
-
-  const currentContent = contentTypes[currentContentIndex];
 
   return (
     <div className="min-h-screen bg-[#1A1F2C]">
@@ -123,11 +126,15 @@ const Home = () => {
                     {type.title}
                   </div>
                 ))}
+                {/* Add an extra item for smooth transition */}
+                <div className="h-[80px] flex items-center text-purple-400">
+                  {contentTypes[0].title}
+                </div>
               </div>
             </div>
           </h1>
           <p className="text-lg md:text-xl mb-8 max-w-2xl text-gray-300 animate-fade-in">
-            {currentContent.description}
+            {currentContent?.description || contentTypes[0].description}
           </p>
           <Link
             to="/services"
@@ -138,12 +145,15 @@ const Home = () => {
 
           {/* Pause/Play Button */}
           <Button
-            variant="ghost"
+            variant="outline"
             size="icon"
             onClick={() => setIsPaused(!isPaused)}
-            className="absolute bottom-4 right-4 text-purple-400 hover:text-purple-300 hover:bg-purple-500/10"
+            className="absolute bottom-4 right-4 rounded-full border border-purple-400/20 bg-purple-500/10 hover:bg-purple-500/20 hover:border-purple-400/40"
           >
-            {isPaused ? <Play className="h-4 w-4" /> : <Pause className="h-4 w-4" />}
+            {isPaused ? 
+              <Play className="h-4 w-4 text-purple-400" /> : 
+              <Pause className="h-4 w-4 text-purple-400" />
+            }
           </Button>
         </div>
       </div>
