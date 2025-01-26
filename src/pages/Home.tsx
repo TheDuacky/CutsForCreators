@@ -115,21 +115,21 @@ const Home = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Level Up Your
             <br />
-            <div className="h-[80px] overflow-hidden relative">
+            <div className="h-[60px] overflow-hidden relative">
               <div 
                 className={`${!isResetting ? 'transition-transform duration-500 ease-in-out' : ''}`}
-                style={{ transform: `translateY(-${currentContentIndex * 80}px)` }}
+                style={{ transform: `translateY(-${currentContentIndex * 60}px)` }}
               >
                 {contentTypes.map((type) => (
                   <div 
                     key={type.id}
-                    className="h-[80px] flex items-center text-purple-400"
+                    className="h-[60px] flex items-center text-purple-400"
                   >
                     {type.title}
                   </div>
                 ))}
                 {/* Add duplicate of first item for smooth loop */}
-                <div className="h-[80px] flex items-center text-purple-400">
+                <div className="h-[60px] flex items-center text-purple-400">
                   {contentTypes[0].title}
                 </div>
               </div>
@@ -150,7 +150,7 @@ const Home = () => {
             variant="outline"
             size="icon"
             onClick={() => setIsPaused(!isPaused)}
-            className="absolute bottom-4 right-4 rounded-full border border-purple-400/20 bg-purple-500/10 hover:bg-purple-500/20"
+            className="absolute bottom-8 right-8 rounded-full border border-purple-400/20 bg-purple-500/10 hover:bg-purple-500/20"
           >
             {isPaused ? 
               <Play className="h-4 w-4 text-purple-400" /> : 
