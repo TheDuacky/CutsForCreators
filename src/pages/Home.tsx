@@ -76,13 +76,20 @@ const Home = () => {
             requestAnimationFrame(() => {
               setIsResetting(false);
             });
-          }, 250); // Reduced from 500 to 250 for faster reset
+          }, 250); // Keep at 250ms for fast reset
           
           return prev;
         }
+
+        // If it's the first or last item (Video Essays), move faster
+        const isVideoEssays = prev === 0 || prev === contentTypes.length;
+        const nextUpdate = setTimeout(() => {
+          return prev + 1;
+        }, isVideoEssays ? CAROUSEL_INTERVAL / 4 : CAROUSEL_INTERVAL / 2);
+
         return prev + 1;
       });
-    }, CAROUSEL_INTERVAL / 2); // Divide by 2 to make each text appear for 1500ms
+    }, CAROUSEL_INTERVAL / 2);
 
     return () => clearInterval(interval);
   }, [isPaused]);
@@ -117,7 +124,7 @@ const Home = () => {
             <br />
             <div className="h-[60px] overflow-hidden relative">
               <div 
-                className={`${!isResetting ? 'transition-transform duration-500 ease-in-out' : ''}`}
+                className={`transform transition-transform duration-500 ease-in-out ${isResetting ? 'duration-0' : ''}`}
                 style={{ transform: `translateY(-${currentContentIndex * 60}px)` }}
               >
                 {contentTypes.map((type) => (
@@ -145,7 +152,7 @@ const Home = () => {
             Our Services <ArrowRight className="ml-2" />
           </Link>
 
-          {/* Pause/Play Button - Updated position */}
+          {/* Pause/Play Button */}
           <Button
             variant="outline"
             size="icon"
