@@ -85,11 +85,11 @@ const Home = () => {
           </p>
         </div>
 
-        <div className="relative px-12">
+        <div className="relative px-12 pb-8">
           <Carousel className="w-full">
             <CarouselContent>
               {allVideos.map((video, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pt-12">
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3 pt-12 pb-4">
                   <div className="relative group">
                     <div className="absolute left-1/2 -translate-x-1/2 -top-12 z-10">
                       <Avatar className="w-24 h-24 border-4 border-[#1A1F2C] shadow-lg">
