@@ -109,10 +109,9 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Level Up Your
-            <br />
-            <div className="h-[60px] overflow-hidden relative">
+            <div className="h-[60px] relative">
               <div 
-                className="transform transition-transform duration-500 ease-in-out"
+                className="absolute w-full transform transition-transform duration-500 ease-in-out"
                 style={{ 
                   transform: `translateY(-${totalOffset}px)`,
                   transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
