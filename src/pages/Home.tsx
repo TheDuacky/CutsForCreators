@@ -40,7 +40,6 @@ const Home = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [currentContentIndex, setCurrentContentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [totalRotations, setTotalRotations] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,23 +64,11 @@ const Home = () => {
     if (isPaused) return;
 
     const interval = setInterval(() => {
-      setCurrentContentIndex((prev) => {
-        const nextIndex = (prev + 1) % contentTypes.length;
-        if (nextIndex === 0) {
-          setTotalRotations(r => r + 1);
-        }
-        return nextIndex;
-      });
-    }, CAROUSEL_INTERVAL / 2);
+      setCurrentContentIndex((prev) => (prev + 1) % contentTypes.length);
+    }, CAROUSEL_INTERVAL);
 
     return () => clearInterval(interval);
   }, [isPaused]);
-
-  // Get the current content for description
-  const currentDescription = contentTypes[currentContentIndex].description;
-
-  // Calculate the total offset based on current index and total rotations
-  const totalOffset = (totalRotations * contentTypes.length + currentContentIndex) * 100;
 
   return (
     <div className="min-h-screen bg-[#1A1F2C]">
@@ -100,35 +87,32 @@ const Home = () => {
       <div className="gradient-line" style={{ left: '10%' }} />
       <div className="gradient-line" style={{ right: '10%' }} />
 
-      {/* Hero Section with Vertical Content Carousel */}
+      {/* Hero Section */}
       <div className="hero-gradient min-h-[80vh] flex items-center justify-center text-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Level Up Your
             <br />
-            <div className="min-h-[100px] relative overflow-visible">
+            <div className="h-[100px] relative overflow-hidden">
               <div 
-                className="transform transition-transform duration-500 ease-in-out absolute left-0"
+                className="absolute left-0 transition-transform duration-500 ease-in-out"
                 style={{ 
-                  transform: `translateY(-${totalOffset}px)`,
-                  transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
+                  transform: `translateY(-${currentContentIndex * 100}px)`,
                 }}
               >
-                {[...Array(totalRotations + 2)].map((_, rotation) => (
-                  contentTypes.map((type) => (
-                    <div 
-                      key={`${type.id}-${rotation}`}
-                      className="min-h-[100px] flex items-center text-purple-400 whitespace-nowrap"
-                    >
-                      {type.title}
-                    </div>
-                  ))
+                {contentTypes.map((type, index) => (
+                  <div 
+                    key={type.id}
+                    className="h-[100px] flex items-center text-purple-400"
+                  >
+                    {type.title}
+                  </div>
                 ))}
               </div>
             </div>
           </h1>
           <p className="text-lg md:text-xl mb-8 max-w-2xl text-gray-300 animate-fade-in">
-            {currentDescription}
+            {contentTypes[currentContentIndex].description}
           </p>
           <Link
             to="/services"
