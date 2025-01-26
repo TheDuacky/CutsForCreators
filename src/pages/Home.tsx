@@ -93,18 +93,18 @@ const Home = () => {
                   <div className="relative group">
                     {/* Avatar positioned to overlap */}
                     <div className="absolute left-1/2 -translate-x-1/2 -top-12 z-10">
-                      <Avatar className="w-24 h-24 border-4 border-[var(--color-background-dark)] shadow-lg">
+                      <Avatar className="w-24 h-24 border-4 border-[#1A1F2C] shadow-lg">
                         <AvatarImage src={video.creator.image} alt={video.creator.name} />
                         <AvatarFallback>{video.creator.name[0]}</AvatarFallback>
                       </Avatar>
                     </div>
                     
                     {/* Card content */}
-                    <div className="pt-16 rounded-2xl overflow-hidden bg-gradient-to-b from-[var(--color-primary-dark)] to-[var(--color-background-dark)] shadow-xl transition-transform duration-300 group-hover:scale-[1.02]">
+                    <div className="pt-16 rounded-2xl overflow-hidden bg-purple-500/20 border border-purple-500/20 shadow-xl transition-all duration-300 group-hover:scale-[1.02] group-hover:bg-purple-500/30">
                       {/* Creator info */}
                       <div className="text-center px-6 pb-6">
                         <h3 className="text-xl font-semibold text-white mb-1">{video.creator.name}</h3>
-                        <p className="text-[var(--color-primary-light)]">{video.creator.subscribers}</p>
+                        <p className="text-purple-400">{video.creator.subscribers}</p>
                       </div>
                       
                       {/* Video thumbnail with hover effect */}
@@ -114,10 +114,10 @@ const Home = () => {
                           alt={video.title}
                           className="w-full h-full object-cover"
                         />
-                        <div className="absolute inset-0 bg-[var(--color-background-overlay)] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div className="absolute inset-0 bg-[#1A1F2C]/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
                           <div className="text-center p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                             <h4 className="text-white font-semibold mb-2">{video.title}</h4>
-                            <p className="text-[var(--color-primary-light)]">{video.views}</p>
+                            <p className="text-purple-400">{video.views}</p>
                           </div>
                         </div>
                       </div>
@@ -126,8 +126,8 @@ const Home = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white border-none" />
-            <CarouselNext className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-dark)] text-white border-none" />
+            <CarouselPrevious className="bg-purple-500 hover:bg-purple-600 text-white border-none transition-colors" />
+            <CarouselNext className="bg-purple-500 hover:bg-purple-600 text-white border-none transition-colors" />
           </Carousel>
         </div>
       </div>
