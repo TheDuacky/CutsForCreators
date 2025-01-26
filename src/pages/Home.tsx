@@ -66,11 +66,9 @@ const Home = () => {
 
     const interval = setInterval(() => {
       setCurrentContentIndex((prev) => {
-        const nextIndex = prev + 1;
-        // When we reach the end, increment total rotations and continue from first item
-        if (nextIndex >= contentTypes.length + 1) {
+        const nextIndex = (prev + 1) % contentTypes.length;
+        if (nextIndex === 0) {
           setTotalRotations(r => r + 1);
-          return 0;
         }
         return nextIndex;
       });
@@ -80,12 +78,10 @@ const Home = () => {
   }, [isPaused]);
 
   // Get the current content for description
-  const currentDescription = currentContentIndex < contentTypes.length 
-    ? contentTypes[currentContentIndex].description 
-    : contentTypes[0].description;
+  const currentDescription = contentTypes[currentContentIndex].description;
 
   // Calculate the total offset based on current index and total rotations
-  const totalOffset = (totalRotations * (contentTypes.length + 1) + currentContentIndex) * 60;
+  const totalOffset = (totalRotations * contentTypes.length + currentContentIndex) * 60;
 
   return (
     <div className="min-h-screen bg-[#1A1F2C]">
@@ -110,26 +106,24 @@ const Home = () => {
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             Level Up Your
             <br />
-            <div className="h-[60px] overflow-hidden relative">
+            <div className="h-[60px] relative">
               <div 
-                className="transform transition-transform duration-500 ease-in-out"
+                className="transform transition-transform duration-500 ease-in-out absolute"
                 style={{ 
                   transform: `translateY(-${totalOffset}px)`,
                   transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)'
                 }}
               >
-                {contentTypes.map((type) => (
-                  <div 
-                    key={type.id}
-                    className="h-[60px] flex items-center text-purple-400"
-                  >
-                    {type.title}
-                  </div>
+                {[...Array(totalRotations + 2)].map((_, rotation) => (
+                  contentTypes.map((type) => (
+                    <div 
+                      key={`${type.id}-${rotation}`}
+                      className="h-[60px] flex items-center text-purple-400"
+                    >
+                      {type.title}
+                    </div>
+                  ))
                 ))}
-                {/* Add duplicate of first item for smooth loop */}
-                <div className="h-[60px] flex items-center text-purple-400">
-                  {contentTypes[0].title}
-                </div>
               </div>
             </div>
           </h1>
