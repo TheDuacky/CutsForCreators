@@ -108,8 +108,8 @@ const Services = () => {
               <div className="absolute inset-0 bg-gradient-to-bl from-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200 rounded-lg" style={{ transform: 'translateZ(60px)' }} />
               
               {/* Content with different elevation levels */}
-              <div className="relative z-10 transform group-hover:translate-y-[-8px] transition-transform duration-700 ease-out">
-                <div className="text-purple-400 mb-4 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-700 ease-out">
+              <div className="relative z-10 transform group-hover:translate-y-[-4px] transition-transform duration-700 ease-out">
+                <div className="text-purple-400 mb-4 transform group-hover:scale-105 group-hover:rotate-2 transition-all duration-700 ease-out">
                   {service.icon}
                 </div>
               </div>
