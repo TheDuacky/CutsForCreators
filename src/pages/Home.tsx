@@ -12,6 +12,7 @@ import { allVideos } from "@/data/creators";
 import { useEffect, useState } from "react";
 import { contentTypes, CAROUSEL_INTERVAL, type ContentType } from "@/data/content-types";
 import { Button } from "@/components/ui/button";
+import { type CarouselApi } from "@/components/ui/carousel";
 
 const features = [
   {
@@ -59,6 +60,8 @@ const Home = () => {
   const [currentContentIndex, setCurrentContentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [totalRotations, setTotalRotations] = useState(0);
+  const [api, setApi] = useState<CarouselApi>();
+  const [autoplayInterval, setAutoplayInterval] = useState<NodeJS.Timeout>();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -94,6 +97,22 @@ const Home = () => {
 
     return () => clearInterval(interval);
   }, [isPaused]);
+
+  // Auto-scroll effect for the "Worked With" carousel
+  useEffect(() => {
+    if (!api || isPaused) {
+      clearInterval(autoplayInterval);
+      return;
+    }
+
+    const interval = setInterval(() => {
+      api.scrollNext();
+    }, 3000);
+
+    setAutoplayInterval(interval);
+
+    return () => clearInterval(interval);
+  }, [api, isPaused]);
 
   // Get the current content for description
   const currentDescription = contentTypes[currentContentIndex].description;
@@ -180,7 +199,14 @@ const Home = () => {
         </div>
 
         <div className="relative px-12">
-          <Carousel className="w-full">
+          <Carousel 
+            className="w-full"
+            setApi={setApi}
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+          >
             <CarouselContent>
               {allVideos.map((video, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
