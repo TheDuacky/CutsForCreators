@@ -100,17 +100,31 @@ const Services = () => {
             <div
               key={service.id}
               onClick={() => navigate(`/services/${service.id}`)}
-              className="p-6 rounded-lg border border-purple-500/20 hover:border-purple-500/40 transition-all duration-500 ease-out group cursor-pointer bg-[#232836]/50 backdrop-blur-sm"
+              className="group relative p-6 rounded-lg border border-purple-500/20 hover:border-purple-500/40 transition-all duration-500 ease-out cursor-pointer bg-[#232836]/50 backdrop-blur-sm hover:transform hover:translate-y-[-4px]"
             >
-              <div className="text-purple-400 mb-4 transform group-hover:scale-110 transition-transform duration-500 ease-out">
-                {service.icon}
+              {/* Holographic layers */}
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-lg" style={{ transform: 'translateZ(20px)' }} />
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100 rounded-lg" style={{ transform: 'translateZ(40px)' }} />
+              <div className="absolute inset-0 bg-gradient-to-bl from-pink-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200 rounded-lg" style={{ transform: 'translateZ(60px)' }} />
+              
+              {/* Content with different elevation levels */}
+              <div className="relative z-10 transform group-hover:translate-y-[-8px] transition-transform duration-700 ease-out">
+                <div className="text-purple-400 mb-4 transform group-hover:scale-110 group-hover:rotate-3 transition-all duration-700 ease-out">
+                  {service.icon}
+                </div>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-purple-300 transition-colors duration-300">
-                {service.title}
-              </h3>
-              <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
-                {service.description}
-              </p>
+              
+              <div className="relative z-20 transform group-hover:translate-y-[-4px] transition-transform duration-500 delay-100 ease-out">
+                <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-purple-300 transition-colors duration-300">
+                  {service.title}
+                </h3>
+              </div>
+              
+              <div className="relative z-30 transform group-hover:translate-y-[-2px] transition-transform duration-500 delay-200 ease-out">
+                <p className="text-gray-300 group-hover:text-gray-200 transition-colors duration-300">
+                  {service.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>
