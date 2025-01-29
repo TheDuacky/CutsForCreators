@@ -9,43 +9,43 @@ interface WorkedWithSectionProps {
 }
 
 const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
-  const [items, setItems] = useState(allVideos);
+  const [items, setItems] = useState([...allVideos, ...allVideos]); // Start with double items
   const containerRef = useRef<HTMLDivElement>(null);
   const [translateX, setTranslateX] = useState(0);
+  const [lastUpdateTime, setLastUpdateTime] = useState(Date.now());
 
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
-    const startTime = Date.now();
-    const duration = 30000; // 30 seconds for one complete loop
-    const threshold = -50; // When to duplicate content (50% of scroll)
-
     const animate = () => {
       if (isPaused) return;
 
       const currentTime = Date.now();
-      const elapsed = currentTime - startTime;
-      const progress = (elapsed % duration) / duration;
-      const newTranslateX = -100 * progress;
+      const elapsed = currentTime - lastUpdateTime;
+      const speed = 0.02; // Pixels per millisecond
+      const newTranslateX = translateX - (elapsed * speed);
 
-      // When we're about to reach the end, reset by removing the first set
-      if (newTranslateX <= threshold) {
-        setTranslateX(newTranslateX + 100); // Reset position
-        // Remove the first set of items (they're now off-screen)
+      // When first set is almost out of view, append new items and reset position
+      if (newTranslateX <= -50) {
+        // Remove the first batch of items (now off-screen)
         setItems(prevItems => {
-          const halfLength = allVideos.length;
-          return [...prevItems.slice(halfLength), ...allVideos];
+          const firstSetLength = allVideos.length;
+          const remainingItems = prevItems.slice(firstSetLength);
+          return [...remainingItems, ...allVideos];
         });
+        setTranslateX(newTranslateX + 50); // Reset position while maintaining momentum
       } else {
         setTranslateX(newTranslateX);
       }
+      
+      setLastUpdateTime(currentTime);
     };
 
     const animationFrame = setInterval(animate, 16); // ~60fps
 
     return () => clearInterval(animationFrame);
-  }, [isPaused]);
+  }, [isPaused, translateX, lastUpdateTime]);
 
   return (
     <div className="w-full">
@@ -59,10 +59,11 @@ const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
       <div className="relative w-full overflow-hidden">
         <div 
           ref={containerRef}
-          className="flex transition-transform duration-1000"
+          className="flex"
           style={{ 
             transform: `translateX(${translateX}%)`,
             width: "200%", // Double width to allow for seamless looping
+            transition: 'transform 16ms linear'
           }}
         >
           {items.map((video, index) => (
