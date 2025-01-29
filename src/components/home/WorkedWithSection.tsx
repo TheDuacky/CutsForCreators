@@ -30,7 +30,6 @@ const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
             align: "start",
             loop: true,
             dragFree: false,
-            draggable: false,
           }}
         >
           <CarouselContent>
