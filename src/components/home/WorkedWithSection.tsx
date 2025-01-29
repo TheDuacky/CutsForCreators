@@ -1,9 +1,4 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-} from "@/components/ui/carousel";
 import { allVideos } from "@/data/creators";
 import { type CarouselApi } from "@/components/ui/carousel";
 import { useEffect, useState } from "react";
@@ -17,12 +12,14 @@ const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
   const [translateX, setTranslateX] = useState(0);
 
   useEffect(() => {
+    const startTime = Date.now();
+    const duration = 30000; // 30 seconds for one complete loop
+
     const animate = () => {
-      setTranslateX(prev => {
-        const newValue = prev - 0.5;
-        // Reset when we've moved enough to create a seamless loop
-        return newValue <= -50 ? 0 : newValue;
-      });
+      const currentTime = Date.now();
+      const elapsed = currentTime - startTime;
+      const progress = (elapsed % duration) / duration;
+      setTranslateX(-100 * progress);
     };
 
     const animationFrame = setInterval(animate, 16); // ~60fps
@@ -41,9 +38,10 @@ const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
 
       <div className="relative w-full overflow-hidden">
         <div 
-          className="flex transition-transform duration-300"
+          className="flex"
           style={{ 
             transform: `translateX(${translateX}%)`,
+            transition: 'transform 1000ms linear',
             width: "200%", // Double width to allow for seamless looping
           }}
         >
