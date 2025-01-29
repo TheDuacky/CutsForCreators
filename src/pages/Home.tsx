@@ -47,15 +47,15 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  // Auto-scroll effect for the "Worked With" carousel
+  // Auto-scroll effect for the "Worked With" carousel with continuous movement
   useEffect(() => {
     if (!api) return;
 
-    const interval = setInterval(() => {
+    const autoScrollInterval = setInterval(() => {
       api.scrollNext();
-    }, 1500); // Faster interval for smoother movement
+    }, 50); // Very small interval for smooth continuous movement
 
-    return () => clearInterval(interval);
+    return () => clearInterval(autoScrollInterval);
   }, [api]);
 
   // Get the current content for description
@@ -89,10 +89,12 @@ const Home = () => {
         totalRotations={totalRotations}
       />
 
-      <WorkedWithSection 
-        isPaused={isPaused}
-        setApi={setApi}
-      />
+      <div className="w-full">
+        <WorkedWithSection 
+          isPaused={isPaused}
+          setApi={setApi}
+        />
+      </div>
 
       <BenefitsSection />
     </div>
