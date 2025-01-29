@@ -23,20 +23,22 @@ const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
 
       const currentTime = Date.now();
       const elapsed = currentTime - lastUpdateTime;
-      const speed = 0.015; // Slower speed for smoother movement
+      const speed = 0.015; // Pixels per millisecond
       const newTranslateX = translateX - (elapsed * speed);
 
-      // Start preparing the transition when we're at 80% of the first set
-      if (newTranslateX <= -40) {
-        // Remove the first batch of items (now off-screen) and add new ones
-        setItems(prevItems => {
-          const firstSetLength = allVideos.length;
-          const remainingItems = prevItems.slice(firstSetLength);
-          return [...remainingItems, ...allVideos];
-        });
-        setTranslateX(newTranslateX + 50); // Reset position while maintaining momentum
+      // When we reach 75% of the first set, start preparing the next set
+      if (newTranslateX <= -37.5) {
+        // Add new items while keeping existing ones
+        setItems(prevItems => [...prevItems, ...allVideos]);
+        // Reset position while maintaining visual continuity
+        setTranslateX(0);
       } else {
         setTranslateX(newTranslateX);
+      }
+      
+      // Clean up old items when they're fully off screen
+      if (items.length > allVideos.length * 3) {
+        setItems(prevItems => prevItems.slice(allVideos.length));
       }
       
       setLastUpdateTime(currentTime);
@@ -45,7 +47,7 @@ const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
     const animationFrame = setInterval(animate, 16); // ~60fps
 
     return () => clearInterval(animationFrame);
-  }, [isPaused, translateX, lastUpdateTime]);
+  }, [isPaused, translateX, lastUpdateTime, items.length]);
 
   return (
     <div className="w-full">
@@ -62,8 +64,8 @@ const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
           className="flex"
           style={{ 
             transform: `translateX(${translateX}%)`,
-            width: "200%", // Double width to allow for seamless looping
-            transition: 'transform 500ms linear' // Smoother transition
+            width: "300%", // Triple width to allow for seamless looping
+            transition: 'transform 500ms linear' // Smooth transition
           }}
         >
           {items.map((video, index) => (
