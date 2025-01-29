@@ -47,17 +47,6 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [isPaused]);
 
-  // Auto-scroll effect for the "Worked With" carousel with continuous movement
-  useEffect(() => {
-    if (!api) return;
-
-    const autoScrollInterval = setInterval(() => {
-      api.scrollNext();
-    }, 50); // Very small interval for smooth continuous movement
-
-    return () => clearInterval(autoScrollInterval);
-  }, [api]);
-
   // Get the current content for description
   const currentDescription = contentTypes[currentContentIndex].description;
 
