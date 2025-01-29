@@ -23,12 +23,12 @@ const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
 
       const currentTime = Date.now();
       const elapsed = currentTime - lastUpdateTime;
-      const speed = 0.02; // Pixels per millisecond
+      const speed = 0.015; // Slower speed for smoother movement
       const newTranslateX = translateX - (elapsed * speed);
 
-      // When first set is almost out of view, append new items and reset position
-      if (newTranslateX <= -50) {
-        // Remove the first batch of items (now off-screen)
+      // Start preparing the transition when we're at 80% of the first set
+      if (newTranslateX <= -40) {
+        // Remove the first batch of items (now off-screen) and add new ones
         setItems(prevItems => {
           const firstSetLength = allVideos.length;
           const remainingItems = prevItems.slice(firstSetLength);
@@ -63,7 +63,7 @@ const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
           style={{ 
             transform: `translateX(${translateX}%)`,
             width: "200%", // Double width to allow for seamless looping
-            transition: 'transform 16ms linear'
+            transition: 'transform 500ms linear' // Smoother transition
           }}
         >
           {items.map((video, index) => (
