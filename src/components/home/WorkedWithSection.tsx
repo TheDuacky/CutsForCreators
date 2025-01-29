@@ -1,11 +1,8 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import { allVideos } from "@/data/creators";
 import { type CarouselApi } from "@/components/ui/carousel";
@@ -25,7 +22,7 @@ const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
         </p>
       </div>
 
-      <div className="relative px-12">
+      <div className="relative">
         <Carousel 
           className="w-full"
           setApi={setApi}
@@ -67,12 +64,6 @@ const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="-left-12 bg-purple-500 hover:bg-purple-600 text-white border-none">
-            <ChevronLeft className="h-4 w-4" />
-          </CarouselPrevious>
-          <CarouselNext className="-right-12 bg-purple-500 hover:bg-purple-600 text-white border-none">
-            <ChevronRight className="h-4 w-4" />
-          </CarouselNext>
         </Carousel>
       </div>
     </div>

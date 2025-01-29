@@ -11,7 +11,6 @@ const Home = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [totalRotations, setTotalRotations] = useState(0);
   const [api, setApi] = useState<CarouselApi>();
-  const [autoplayInterval, setAutoplayInterval] = useState<NodeJS.Timeout>();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,19 +49,14 @@ const Home = () => {
 
   // Auto-scroll effect for the "Worked With" carousel
   useEffect(() => {
-    if (!api || isPaused) {
-      clearInterval(autoplayInterval);
-      return;
-    }
+    if (!api) return;
 
     const interval = setInterval(() => {
       api.scrollNext();
     }, 3000);
 
-    setAutoplayInterval(interval);
-
     return () => clearInterval(interval);
-  }, [api, isPaused]);
+  }, [api]);
 
   // Get the current content for description
   const currentDescription = contentTypes[currentContentIndex].description;
