@@ -1,7 +1,7 @@
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { allVideos } from "@/data/creators";
 import { type CarouselApi } from "@/components/ui/carousel";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 interface WorkedWithSectionProps {
   isPaused: boolean;
@@ -9,23 +9,43 @@ interface WorkedWithSectionProps {
 }
 
 const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
+  const [items, setItems] = useState(allVideos);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [translateX, setTranslateX] = useState(0);
 
   useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
     const startTime = Date.now();
     const duration = 30000; // 30 seconds for one complete loop
+    const threshold = -50; // When to duplicate content (50% of scroll)
 
     const animate = () => {
+      if (isPaused) return;
+
       const currentTime = Date.now();
       const elapsed = currentTime - startTime;
       const progress = (elapsed % duration) / duration;
-      setTranslateX(-100 * progress);
+      const newTranslateX = -100 * progress;
+
+      // When we're about to reach the end, reset by removing the first set
+      if (newTranslateX <= threshold) {
+        setTranslateX(newTranslateX + 100); // Reset position
+        // Remove the first set of items (they're now off-screen)
+        setItems(prevItems => {
+          const halfLength = allVideos.length;
+          return [...prevItems.slice(halfLength), ...allVideos];
+        });
+      } else {
+        setTranslateX(newTranslateX);
+      }
     };
 
     const animationFrame = setInterval(animate, 16); // ~60fps
 
     return () => clearInterval(animationFrame);
-  }, []);
+  }, [isPaused]);
 
   return (
     <div className="w-full">
@@ -38,17 +58,16 @@ const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
 
       <div className="relative w-full overflow-hidden">
         <div 
-          className="flex"
+          ref={containerRef}
+          className="flex transition-transform duration-1000"
           style={{ 
             transform: `translateX(${translateX}%)`,
-            transition: 'transform 1000ms linear',
             width: "200%", // Double width to allow for seamless looping
           }}
         >
-          {/* Render items twice for seamless loop */}
-          {[...allVideos, ...allVideos].map((video, index) => (
+          {items.map((video, index) => (
             <div 
-              key={index} 
+              key={`${video.creator.name}-${index}`}
               className="flex-none w-1/6 p-4"
               style={{ minWidth: "300px" }}
             >
