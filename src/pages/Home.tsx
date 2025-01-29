@@ -53,7 +53,7 @@ const Home = () => {
 
     const interval = setInterval(() => {
       api.scrollNext();
-    }, 3000);
+    }, 1500); // Faster interval for smoother movement
 
     return () => clearInterval(interval);
   }, [api]);

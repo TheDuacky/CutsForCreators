@@ -29,6 +29,8 @@ const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
           opts={{
             align: "start",
             loop: true,
+            dragFree: false,
+            draggable: false,
           }}
         >
           <CarouselContent>
