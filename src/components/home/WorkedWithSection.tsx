@@ -52,30 +52,51 @@ const WorkedWithSection = ({ isPaused, setApi }: WorkedWithSectionProps) => {
               className="flex-none w-1/6 p-4"
               style={{ minWidth: "300px" }}
             >
-              <div className="relative group rounded-2xl overflow-hidden bg-[#1A1F2C]/80 border border-purple-500/20">
+              <div className="relative group rounded-2xl overflow-hidden bg-[#1A1F2C]/80 border border-purple-500/20 transition-all duration-300 hover:scale-105 hover:border-purple-500/50">
                 <div className="p-4 flex items-center gap-3">
-                  <Avatar className="w-12 h-12">
-                    <AvatarImage src={video.creator.image} alt={video.creator.name} />
-                    <AvatarFallback>{video.creator.name[0]}</AvatarFallback>
-                  </Avatar>
+                  <a 
+                    href={video.creator.profileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:opacity-80 transition-opacity"
+                  >
+                    <Avatar className="w-12 h-12">
+                      <AvatarImage src={video.creator.image} alt={video.creator.name} />
+                      <AvatarFallback>{video.creator.name[0]}</AvatarFallback>
+                    </Avatar>
+                  </a>
                   <div className="flex-1">
-                    <h3 className="text-sm font-semibold text-white">{video.creator.name}</h3>
+                    <a 
+                      href={video.creator.profileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-purple-400 transition-colors"
+                    >
+                      <h3 className="text-sm font-semibold text-white">{video.creator.name}</h3>
+                    </a>
                     <p className="text-xs text-purple-400">{video.creator.subscribers} • {video.views}</p>
                   </div>
                 </div>
                 
-                <div className="aspect-video bg-gray-800/50">
-                  <img 
-                    src={video.thumbnail} 
-                    alt={video.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-[#1A1F2C]/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center">
-                    <div className="text-center p-3">
-                      <h4 className="text-sm font-semibold text-white">{video.title}</h4>
+                <a 
+                  href={video.videoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  <div className="aspect-video bg-gray-800/50 relative overflow-hidden">
+                    <img 
+                      src={video.thumbnail} 
+                      alt={video.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-[#1A1F2C]/80 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center backdrop-blur-sm">
+                      <div className="text-center p-3 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <h4 className="text-sm font-semibold text-white">{video.title}</h4>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </a>
               </div>
             </div>
           ))}
