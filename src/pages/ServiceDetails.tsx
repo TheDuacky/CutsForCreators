@@ -2,6 +2,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import { ArrowLeft, Clock, Check, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const services = {
   "video-editing": {
@@ -102,10 +104,91 @@ const services = {
   }
 };
 
+const portfolioItems = {
+  "video-editing": [
+    {
+      title: "Travel Vlog Edit",
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
+      description: "Dynamic travel footage with smooth transitions"
+    },
+    {
+      title: "Product Review",
+      image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
+      description: "Professional product showcase with detailed shots"
+    },
+    {
+      title: "Tech Tutorial",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
+      description: "Step-by-step editing with clear instructions"
+    },
+  ],
+  "youtube-optimization": [
+    {
+      title: "Channel Growth Strategy",
+      image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d",
+      description: "Strategic channel optimization"
+    },
+    {
+      title: "Thumbnail Design",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+      description: "Eye-catching thumbnail creation"
+    },
+  ],
+  "motion-graphics": [
+    {
+      title: "Animated Intro",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+      description: "Engaging animated intro"
+    },
+    {
+      title: "Logo Animation",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+      description: "Brand consistent logo animation"
+    },
+  ],
+  "content-planning": [
+    {
+      title: "Content Calendar",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+      description: "Detailed content calendar"
+    },
+    {
+      title: "Audience Analysis",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+      description: "Audience insights for content strategy"
+    },
+  ],
+  "special-effects": [
+    {
+      title: "VFX Effect",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+      description: "High-quality visual effects"
+    },
+    {
+      title: "Particle Animation",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+      description: "Particle effects for scene enhancement"
+    },
+  ],
+  "analytics-review": [
+    {
+      title: "Analytics Report",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+      description: "Comprehensive analytics report"
+    },
+    {
+      title: "Content Optimization",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
+      description: "Optimized content suggestions"
+    },
+  ]
+};
+
 const ServiceDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const service = services[id as keyof typeof services];
+  const portfolio = portfolioItems[id as keyof typeof portfolioItems] || [];
 
   if (!service) {
     return (
@@ -135,6 +218,37 @@ const ServiceDetails = () => {
           <div className="lg:col-span-2">
             <h1 className="text-4xl font-bold mb-6 text-white">{service.title}</h1>
             <p className="text-xl text-gray-300 mb-8">{service.description}</p>
+
+            {portfolio.length > 0 && (
+              <div className="mb-8">
+                <h2 className="text-2xl font-bold mb-6 text-white">Our Work</h2>
+                <Carousel className="w-full">
+                  <CarouselContent>
+                    {portfolio.map((item, index) => (
+                      <CarouselItem key={index} className="md:basis-1/2">
+                        <Card className="bg-[#232836] border-purple-500/20">
+                          <CardContent className="p-0">
+                            <AspectRatio ratio={16 / 9}>
+                              <img
+                                src={item.image}
+                                alt={item.title}
+                                className="object-cover w-full h-full rounded-t-lg"
+                              />
+                            </AspectRatio>
+                            <div className="p-4">
+                              <h3 className="text-lg font-semibold text-white mb-1">{item.title}</h3>
+                              <p className="text-gray-300 text-sm">{item.description}</p>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="left-2" />
+                  <CarouselNext className="right-2" />
+                </Carousel>
+              </div>
+            )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <Card className="bg-[#232836] border-purple-500/20">
