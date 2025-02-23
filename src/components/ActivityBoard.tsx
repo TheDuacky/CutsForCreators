@@ -7,16 +7,16 @@ import { activityData, ActivityStatus } from '../data/activity-data';
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 const ActivityBoard = () => {
-  const getActivityColor = (count: number, status: ActivityStatus) => {
-    if (count === 0) return 'bg-[#232836]';
-    
+  const getStatusColor = (status: ActivityStatus) => {
     switch (status) {
       case 'available':
-        return count < 5 ? 'bg-purple-900' : count < 10 ? 'bg-purple-700' : count < 20 ? 'bg-purple-500' : 'bg-purple-400';
+        return 'bg-purple-500';
       case 'busy':
-        return count < 5 ? 'bg-red-900' : count < 10 ? 'bg-red-700' : count < 20 ? 'bg-red-500' : 'bg-red-400';
+        return 'bg-red-500';
       case 'away':
-        return count < 5 ? 'bg-gray-700' : count < 10 ? 'bg-gray-600' : count < 20 ? 'bg-gray-500' : 'bg-gray-400';
+        return 'bg-gray-500';
+      default:
+        return 'bg-[#232836]';
     }
   };
 
@@ -31,7 +31,7 @@ const ActivityBoard = () => {
       <CardContent className="pt-6">
         <div className="space-y-6">
           <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold text-white">Activity Board</h2>
+            <h2 className="text-2xl font-bold text-white">Availability Timeline</h2>
             <div className="flex gap-4">
               {statusLegend.map(({ status, icon: Icon, label, color }) => (
                 <div key={status} className="flex items-center gap-2">
@@ -56,23 +56,20 @@ const ActivityBoard = () => {
 
               {/* Activity grid */}
               {activityData.map((yearData) => (
-                <div key={yearData.year} className="grid grid-cols-[80px_repeat(12,1fr)] gap-1 mb-1">
-                  <div className="text-gray-400 text-sm">{yearData.year}</div>
-                  {months.map((month) => {
-                    const activity = yearData.months[month] || { count: 0, status: 'away' as ActivityStatus };
-                    return (
-                      <div
-                        key={`${yearData.year}-${month}`}
-                        className={`aspect-square rounded ${getActivityColor(activity.count, activity.status)} flex items-center justify-center`}
-                      >
-                        {activity.count > 0 && (
-                          <span className="text-xs text-white font-medium">
-                            {activity.count}
-                          </span>
-                        )}
+                <div key={yearData.year}>
+                  <div className="grid grid-cols-[80px_repeat(12,1fr)] gap-1 mb-1">
+                    <div className="text-gray-400 text-sm">{yearData.year}</div>
+                    {months.map((month) => (
+                      <div key={`${yearData.year}-${month}`} className="grid grid-rows-4 gap-1">
+                        {(yearData.months[month]?.weeks || Array(4).fill('away')).map((status, weekIndex) => (
+                          <div
+                            key={`${yearData.year}-${month}-${weekIndex}`}
+                            className={`aspect-square rounded ${getStatusColor(status)}`}
+                          />
+                        ))}
                       </div>
-                    );
-                  })}
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
