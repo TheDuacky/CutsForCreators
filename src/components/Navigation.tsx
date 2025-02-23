@@ -1,6 +1,7 @@
+
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Video, Home, Briefcase } from "lucide-react";
+import { Menu, X, Video, Home, Briefcase, User } from "lucide-react";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,6 +11,7 @@ const Navigation = () => {
     { href: "/", label: "Home", icon: <Home size={18} /> },
     { href: "/services", label: "Services", icon: <Briefcase size={18} /> },
     { href: "/showreel", label: "Showreel", icon: <Video size={18} /> },
+    { href: "/bio", label: "Bio", icon: <User size={18} /> },
   ];
 
   return (
