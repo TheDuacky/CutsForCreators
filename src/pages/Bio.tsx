@@ -1,8 +1,70 @@
+
+import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Mail, Twitter, Linkedin, Globe } from "lucide-react";
+import { Mail, Twitter, Linkedin, Globe, Play, Users, Eye } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+
+// Replace this with your actual YouTube API key
+const YOUTUBE_API_KEY = 'YOUR_API_KEY';
+
+// Replace these with your actual video IDs
+const VIDEO_IDS = [
+  'dQw4w9WgXcQ', // Example video ID
+  'jNQXAC9IVRw', // Example video ID
+];
+
+interface VideoStats {
+  viewCount: number;
+  channelSubscribers: number;
+  videoCount: number;
+}
+
+const fetchVideoStats = async (): Promise<VideoStats> => {
+  const stats = {
+    viewCount: 0,
+    channelSubscribers: 0,
+    videoCount: 0,
+  };
+
+  const uniqueChannels = new Set<string>();
+
+  for (const videoId of VIDEO_IDS) {
+    const videoResponse = await fetch(
+      `https://www.googleapis.com/youtube/v3/videos?part=statistics,snippet&id=${videoId}&key=${YOUTUBE_API_KEY}`
+    );
+    const videoData = await videoResponse.json();
+
+    if (videoData.items && videoData.items[0]) {
+      const video = videoData.items[0];
+      stats.viewCount += parseInt(video.statistics.viewCount, 10);
+      
+      const channelId = video.snippet.channelId;
+      if (!uniqueChannels.has(channelId)) {
+        uniqueChannels.add(channelId);
+        
+        const channelResponse = await fetch(
+          `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${YOUTUBE_API_KEY}`
+        );
+        const channelData = await channelResponse.json();
+        
+        if (channelData.items && channelData.items[0]) {
+          stats.channelSubscribers += parseInt(channelData.items[0].statistics.subscriberCount, 10);
+          stats.videoCount += parseInt(channelData.items[0].statistics.videoCount, 10);
+        }
+      }
+    }
+  }
+
+  return stats;
+};
 
 const Bio = () => {
+  const { data: stats, isLoading } = useQuery({
+    queryKey: ['youtubeStats'],
+    queryFn: fetchVideoStats,
+  });
+
   return (
     <div className="min-h-screen bg-[#1A1F2C] pt-24 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -28,6 +90,36 @@ const Bio = () => {
             </a>
           </div>
         </div>
+
+        {/* YouTube Stats Section */}
+        <Card className="bg-[#232836] border-purple-500/20 mb-8">
+          <CardContent className="pt-6">
+            <h2 className="text-2xl font-bold text-white mb-6">Impact & Reach</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="flex flex-col items-center p-4 bg-[#1A1F2C] rounded-lg">
+                <Eye className="w-8 h-8 text-purple-400 mb-2" />
+                <p className="text-2xl font-bold text-white">
+                  {isLoading ? "..." : new Intl.NumberFormat().format(stats?.viewCount || 0)}
+                </p>
+                <p className="text-gray-300">Total Views</p>
+              </div>
+              <div className="flex flex-col items-center p-4 bg-[#1A1F2C] rounded-lg">
+                <Users className="w-8 h-8 text-purple-400 mb-2" />
+                <p className="text-2xl font-bold text-white">
+                  {isLoading ? "..." : new Intl.NumberFormat().format(stats?.channelSubscribers || 0)}
+                </p>
+                <p className="text-gray-300">Channel Subscribers</p>
+              </div>
+              <div className="flex flex-col items-center p-4 bg-[#1A1F2C] rounded-lg">
+                <Play className="w-8 h-8 text-purple-400 mb-2" />
+                <p className="text-2xl font-bold text-white">
+                  {isLoading ? "..." : new Intl.NumberFormat().format(stats?.videoCount || 0)}
+                </p>
+                <p className="text-gray-300">Videos</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="grid gap-8">
           <Card className="bg-[#232836] border-purple-500/20">
