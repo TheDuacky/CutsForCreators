@@ -1,11 +1,10 @@
-
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Mail, Twitter, Linkedin, Globe } from "lucide-react";
 
 const Bio = () => {
   return (
-    <div className="min-h-screen bg-[#1A1F2C] pt-24">
+    <div className="min-h-screen bg-[#1A1F2C] pt-24 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <Avatar className="w-32 h-32 mx-auto mb-6">
@@ -30,7 +29,7 @@ const Bio = () => {
           </div>
         </div>
 
-        <div className="grid gap-8 mb-12">
+        <div className="grid gap-8">
           <Card className="bg-[#232836] border-purple-500/20">
             <CardContent className="pt-6">
               <h2 className="text-2xl font-bold text-white mb-4">About Me</h2>
