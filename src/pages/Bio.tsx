@@ -1,9 +1,9 @@
-
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Mail, Twitter, Linkedin, Globe, Play, Users, Eye } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import ActivityBoard from "@/components/ActivityBoard";
 
 // Replace this with your actual YouTube API key
 const YOUTUBE_API_KEY = 'YOUR_API_KEY';
@@ -120,6 +120,9 @@ const Bio = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Activity Board */}
+        <ActivityBoard />
 
         <div className="grid gap-8">
           <Card className="bg-[#232836] border-purple-500/20">
