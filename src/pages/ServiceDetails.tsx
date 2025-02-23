@@ -109,17 +109,17 @@ const portfolioItems = {
     {
       title: "Travel Vlog Edit",
       image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b",
-      description: "Dynamic travel footage with smooth transitions"
+      description: "Dynamic travel footage with smooth transitions and color grading that brings the destination to life."
     },
     {
       title: "Product Review",
       image: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7",
-      description: "Professional product showcase with detailed shots"
+      description: "Professional product showcase with cinematic shots and detailed close-ups."
     },
     {
       title: "Tech Tutorial",
       image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6",
-      description: "Step-by-step editing with clear instructions"
+      description: "Clear, engaging step-by-step tutorial with motion graphics and screen recordings."
     },
   ],
   "youtube-optimization": [
@@ -220,33 +220,45 @@ const ServiceDetails = () => {
             <p className="text-xl text-gray-300 mb-8">{service.description}</p>
 
             {portfolio.length > 0 && (
-              <div className="mb-8">
-                <h2 className="text-2xl font-bold mb-6 text-white">Our Work</h2>
-                <Carousel className="w-full">
-                  <CarouselContent>
-                    {portfolio.map((item, index) => (
-                      <CarouselItem key={index} className="md:basis-1/2">
-                        <Card className="bg-[#232836] border-purple-500/20">
-                          <CardContent className="p-0">
-                            <AspectRatio ratio={16 / 9}>
-                              <img
-                                src={item.image}
-                                alt={item.title}
-                                className="object-cover w-full h-full rounded-t-lg"
-                              />
-                            </AspectRatio>
-                            <div className="p-4">
-                              <h3 className="text-lg font-semibold text-white mb-1">{item.title}</h3>
-                              <p className="text-gray-300 text-sm">{item.description}</p>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious className="left-2" />
-                  <CarouselNext className="right-2" />
-                </Carousel>
+              <div className="mb-12">
+                <h2 className="text-2xl font-bold mb-6 text-white">Featured Work</h2>
+                <div className="relative">
+                  <Carousel
+                    opts={{
+                      align: "start",
+                      loop: true,
+                    }}
+                    className="w-full"
+                  >
+                    <CarouselContent>
+                      {portfolio.map((item, index) => (
+                        <CarouselItem key={index}>
+                          <Card className="bg-[#232836] border-purple-500/20">
+                            <CardContent className="p-0">
+                              <AspectRatio ratio={16 / 9}>
+                                <img
+                                  src={item.image}
+                                  alt={item.title}
+                                  className="object-cover w-full h-full rounded-t-lg"
+                                />
+                              </AspectRatio>
+                              <div className="p-6">
+                                <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
+                                <p className="text-gray-300">{item.description}</p>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                    <div className="absolute -left-4 top-1/2 -translate-y-1/2">
+                      <CarouselPrevious className="h-12 w-12" />
+                    </div>
+                    <div className="absolute -right-4 top-1/2 -translate-y-1/2">
+                      <CarouselNext className="h-12 w-12" />
+                    </div>
+                  </Carousel>
+                </div>
               </div>
             )}
 
