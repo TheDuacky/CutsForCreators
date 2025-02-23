@@ -205,7 +205,7 @@ const ServiceDetails = () => {
 
   return (
     <div className="min-h-screen bg-[#1A1F2C] pt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <Button
           variant="ghost"
           className="mb-8 text-white hover:text-purple-400"
@@ -214,99 +214,90 @@ const ServiceDetails = () => {
           <ArrowLeft className="mr-2 h-4 w-4" /> Back to Services
         </Button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            <h1 className="text-4xl font-bold mb-6 text-white">{service.title}</h1>
-            <p className="text-xl text-gray-300 mb-8">{service.description}</p>
+        <div className="space-y-12">
+          <div className="text-center max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">{service.title}</h1>
+            <p className="text-xl text-gray-300">{service.description}</p>
+          </div>
 
-            {portfolio.length > 0 && (
-              <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6 text-white">Featured Work</h2>
-                <div className="relative">
-                  <Carousel
-                    opts={{
-                      align: "start",
-                      loop: true,
-                    }}
-                    className="w-full"
-                  >
-                    <CarouselContent>
-                      {portfolio.map((item, index) => (
-                        <CarouselItem key={index}>
-                          <Card className="bg-[#232836] border-purple-500/20">
-                            <CardContent className="p-0">
-                              <AspectRatio ratio={16 / 9}>
-                                <img
-                                  src={item.image}
-                                  alt={item.title}
-                                  className="object-cover w-full h-full rounded-t-lg"
-                                />
-                              </AspectRatio>
-                              <div className="p-6">
-                                <h3 className="text-xl font-semibold text-white mb-2">{item.title}</h3>
-                                <p className="text-gray-300">{item.description}</p>
-                              </div>
-                            </CardContent>
-                          </Card>
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                    <div className="absolute -left-4 top-1/2 -translate-y-1/2">
-                      <CarouselPrevious className="h-12 w-12" />
-                    </div>
-                    <div className="absolute -right-4 top-1/2 -translate-y-1/2">
-                      <CarouselNext className="h-12 w-12" />
-                    </div>
-                  </Carousel>
-                </div>
+          {portfolio.length > 0 && (
+            <div className="max-w-5xl mx-auto">
+              <div className="relative px-8">
+                <Carousel
+                  opts={{
+                    align: "start",
+                    loop: true,
+                  }}
+                  className="w-full"
+                >
+                  <CarouselContent>
+                    {portfolio.map((item, index) => (
+                      <CarouselItem key={index}>
+                        <AspectRatio ratio={16 / 9} className="bg-[#232836] rounded-lg overflow-hidden">
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="object-cover w-full h-full"
+                          />
+                        </AspectRatio>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <div className="absolute -left-4 top-1/2 -translate-y-1/2">
+                    <CarouselPrevious className="h-12 w-12" />
+                  </div>
+                  <div className="absolute -right-4 top-1/2 -translate-y-1/2">
+                    <CarouselNext className="h-12 w-12" />
+                  </div>
+                </Carousel>
               </div>
-            )}
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <Card className="bg-[#232836] border-purple-500/20">
-                <CardContent className="pt-6">
-                  <div className="flex items-center mb-4">
-                    <Clock className="h-5 w-5 text-purple-400 mr-2" />
-                    <h3 className="text-lg font-semibold text-white">Turnaround Time</h3>
-                  </div>
-                  <p className="text-gray-300">{service.turnaround}</p>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-[#232836] border-purple-500/20">
-                <CardContent className="pt-6">
-                  <div className="flex items-center mb-4">
-                    <Package className="h-5 w-5 text-purple-400 mr-2" />
-                    <h3 className="text-lg font-semibold text-white">Deliverables</h3>
-                  </div>
-                  <p className="text-gray-300">{service.deliverables}</p>
-                </CardContent>
-              </Card>
             </div>
+          )}
 
-            <Card className="bg-[#232836] border-purple-500/20">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <Card className="bg-[#232836] border-purple-500/20 lg:col-span-2">
               <CardContent className="pt-6">
-                <h3 className="text-xl font-semibold mb-4 text-white">What's Included</h3>
+                <h3 className="text-xl font-semibold mb-6 text-white">What's Included</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {service.features.map((feature, index) => (
                     <div key={index} className="flex items-start">
-                      <Check className="h-5 w-5 text-purple-400 mr-2 mt-1" />
+                      <Check className="h-5 w-5 text-purple-400 mr-2 mt-1 flex-shrink-0" />
                       <span className="text-gray-300">{feature}</span>
                     </div>
                   ))}
                 </div>
               </CardContent>
             </Card>
-          </div>
 
-          <div className="lg:col-span-1">
-            <Card className="bg-[#232836] border-purple-500/20 sticky top-24">
+            <Card className="bg-[#232836] border-purple-500/20">
               <CardContent className="pt-6">
                 <h3 className="text-2xl font-bold mb-4 text-white">Pricing</h3>
                 <p className="text-3xl font-bold text-purple-400 mb-6">{service.pricing}</p>
                 <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
                   Get Started
                 </Button>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card className="bg-[#232836] border-purple-500/20">
+              <CardContent className="pt-6">
+                <div className="flex items-center mb-4">
+                  <Clock className="h-5 w-5 text-purple-400 mr-2" />
+                  <h3 className="text-lg font-semibold text-white">Turnaround Time</h3>
+                </div>
+                <p className="text-gray-300">{service.turnaround}</p>
+              </CardContent>
+            </Card>
+
+            <Card className="bg-[#232836] border-purple-500/20">
+              <CardContent className="pt-6">
+                <div className="flex items-center mb-4">
+                  <Package className="h-5 w-5 text-purple-400 mr-2" />
+                  <h3 className="text-lg font-semibold text-white">Deliverables</h3>
+                </div>
+                <p className="text-gray-300">{service.deliverables}</p>
               </CardContent>
             </Card>
           </div>
