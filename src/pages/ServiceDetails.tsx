@@ -1,9 +1,16 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { ArrowLeft, Clock, Check, Package } from "lucide-react";
+import { ArrowLeft, Clock, Check, Package, Mail, MessageSquare, Globe, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const services = {
   "video-editing": {
@@ -273,9 +280,73 @@ const ServiceDetails = () => {
               <CardContent className="pt-6">
                 <h3 className="text-2xl font-bold mb-4 text-white">Pricing</h3>
                 <p className="text-3xl font-bold text-purple-400 mb-6">{service.pricing}</p>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
-                  Get Started
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
+                      Get Started
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="bg-[#232836] border border-purple-500/20 text-white sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle className="text-2xl font-bold text-white">Let's Connect</DialogTitle>
+                    </DialogHeader>
+                    <div className="space-y-6 py-4">
+                      <div className="space-y-4">
+                        <a 
+                          href="mailto:contact@example.com" 
+                          className="flex items-center p-4 bg-[#1A1F2C] rounded-lg hover:bg-[#2A2F3C] transition-colors"
+                        >
+                          <Mail className="h-5 w-5 text-purple-400 mr-3" />
+                          <div>
+                            <h4 className="font-semibold">Email Us</h4>
+                            <p className="text-gray-300 text-sm">contact@example.com</p>
+                          </div>
+                        </a>
+
+                        <a 
+                          href="https://discord.gg/example" 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="flex items-center p-4 bg-[#1A1F2C] rounded-lg hover:bg-[#2A2F3C] transition-colors"
+                        >
+                          <MessageSquare className="h-5 w-5 text-purple-400 mr-3" />
+                          <div>
+                            <h4 className="font-semibold">Discord</h4>
+                            <p className="text-gray-300 text-sm">Join our community</p>
+                          </div>
+                        </a>
+
+                        <a 
+                          href="tel:+1234567890" 
+                          className="flex items-center p-4 bg-[#1A1F2C] rounded-lg hover:bg-[#2A2F3C] transition-colors"
+                        >
+                          <Phone className="h-5 w-5 text-purple-400 mr-3" />
+                          <div>
+                            <h4 className="font-semibold">Phone</h4>
+                            <p className="text-gray-300 text-sm">+1 (234) 567-890</p>
+                          </div>
+                        </a>
+
+                        <a 
+                          href="https://example.com" 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="flex items-center p-4 bg-[#1A1F2C] rounded-lg hover:bg-[#2A2F3C] transition-colors"
+                        >
+                          <Globe className="h-5 w-5 text-purple-400 mr-3" />
+                          <div>
+                            <h4 className="font-semibold">Website</h4>
+                            <p className="text-gray-300 text-sm">Visit our website</p>
+                          </div>
+                        </a>
+                      </div>
+                      
+                      <p className="text-center text-gray-300 text-sm">
+                        We'll get back to you within 24 hours
+                      </p>
+                    </div>
+                  </DialogContent>
+                </Dialog>
               </CardContent>
             </Card>
           </div>
