@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
-import { Circle, CircleSlash, AlertCircle } from "lucide-react";
+import { Circle, CircleSlash, AlertCircle, Star } from "lucide-react";
 import { activityData, ActivityStatus } from '../data/activity-data';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -57,7 +57,7 @@ const ActivityBoard = () => {
   };
 
   const statusLegend = [
-    { status: 'available', icon: Circle, label: 'Available', color: 'text-purple-400' },
+    { status: 'available', icon: Star, label: 'Available', color: 'text-purple-400' },
     { status: 'busy', icon: AlertCircle, label: 'Busy', color: 'text-red-400' },
     { status: 'away', icon: CircleSlash, label: 'Away', color: 'text-gray-400' },
     { status: 'current', icon: Circle, label: 'Current Week', color: 'text-green-400' },
