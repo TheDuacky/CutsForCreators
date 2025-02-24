@@ -2,6 +2,12 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Circle, CircleSlash, AlertCircle } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { activityData, ActivityStatus } from '../data/activity-data';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -18,6 +24,12 @@ const ActivityBoard = () => {
       default:
         return 'bg-[#232836]';
     }
+  };
+
+  const getWeekStartDate = (year: number, month: string, weekIndex: number) => {
+    const monthIndex = months.indexOf(month);
+    const date = new Date(year, monthIndex, 1 + (weekIndex * 7));
+    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   };
 
   const statusLegend = [
@@ -62,10 +74,20 @@ const ActivityBoard = () => {
                     {months.map((month) => (
                       <div key={`${yearData.year}-${month}`} className="grid grid-rows-4 gap-1">
                         {(yearData.months[month]?.weeks || Array(4).fill('away')).map((status, weekIndex) => (
-                          <div
-                            key={`${yearData.year}-${month}-${weekIndex}`}
-                            className={`aspect-square rounded ${getStatusColor(status)}`}
-                          />
+                          <TooltipProvider key={`${yearData.year}-${month}-${weekIndex}`}>
+                            <Tooltip>
+                              <TooltipTrigger>
+                                <div
+                                  className={`aspect-square rounded ${getStatusColor(status)} cursor-help`}
+                                />
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <div className="text-sm">
+                                  Week of {getWeekStartDate(yearData.year, month, weekIndex)}
+                                </div>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
                         ))}
                       </div>
                     ))}

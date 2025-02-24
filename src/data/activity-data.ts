@@ -33,28 +33,6 @@ export const activityData: WeeklyActivity[] = [
         weeks: ['available', 'away', 'away', 'available']
       }
     }
-  },
-  {
-    year: 2024,
-    months: {
-      Jul: {
-        weeks: ['busy', 'busy', 'available', 'away']
-      },
-      Aug: {
-        weeks: ['available', 'available', 'busy', 'available']
-      },
-      Sep: {
-        weeks: ['away', 'available', 'available', 'busy']
-      },
-      Oct: {
-        weeks: ['busy', 'busy', 'available', 'available']
-      },
-      Nov: {
-        weeks: ['available', 'away', 'away', 'available']
-      },
-      Dec: {
-        weeks: ['busy', 'available', 'busy', 'available']
-      }
-    }
   }
 ];
+
