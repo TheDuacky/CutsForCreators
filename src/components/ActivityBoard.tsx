@@ -22,8 +22,19 @@ const ActivityBoard = () => {
 
   const getWeekStartDate = (year: number, month: string, weekIndex: number) => {
     const monthIndex = months.indexOf(month);
-    const date = new Date(year, monthIndex, 1 + (weekIndex * 7));
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    const firstDay = new Date(year, monthIndex, 1);
+    
+    // Find the first Monday
+    const firstMonday = new Date(firstDay);
+    while (firstMonday.getDay() !== 1) { // 1 represents Monday
+      firstMonday.setDate(firstMonday.getDate() + 1);
+    }
+    
+    // Add weeks
+    const targetDate = new Date(firstMonday);
+    targetDate.setDate(firstMonday.getDate() + (weekIndex * 7));
+    
+    return targetDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   };
 
   const statusLegend = [
