@@ -7,7 +7,9 @@ import { activityData, ActivityStatus } from '../data/activity-data';
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 const ActivityBoard = () => {
-  const getStatusColor = (status: ActivityStatus) => {
+  const getStatusColor = (status: ActivityStatus, isCurrentWeek: boolean) => {
+    if (isCurrentWeek) return 'bg-green-500';
+    
     switch (status) {
       case 'available':
         return 'bg-purple-500';
@@ -34,13 +36,31 @@ const ActivityBoard = () => {
     const targetDate = new Date(firstMonday);
     targetDate.setDate(firstMonday.getDate() + (weekIndex * 7));
     
-    return targetDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    return targetDate;
+  };
+
+  const isCurrentWeek = (date: Date) => {
+    const today = new Date();
+    const currentWeekStart = new Date(today);
+    
+    // Go back to Monday
+    while (currentWeekStart.getDay() !== 1) {
+      currentWeekStart.setDate(currentWeekStart.getDate() - 1);
+    }
+    
+    // Reset time parts for comparison
+    currentWeekStart.setHours(0, 0, 0, 0);
+    const compareDate = new Date(date);
+    compareDate.setHours(0, 0, 0, 0);
+    
+    return compareDate.getTime() === currentWeekStart.getTime();
   };
 
   const statusLegend = [
     { status: 'available', icon: Circle, label: 'Available', color: 'text-purple-400' },
     { status: 'busy', icon: AlertCircle, label: 'Busy', color: 'text-red-400' },
     { status: 'away', icon: CircleSlash, label: 'Away', color: 'text-gray-400' },
+    { status: 'current', icon: Circle, label: 'Current Week', color: 'text-green-400' },
   ];
 
   return (
@@ -78,16 +98,21 @@ const ActivityBoard = () => {
                     <div className="text-gray-400 text-sm">{yearData.year}</div>
                     {months.map((month) => (
                       <div key={`${yearData.year}-${month}`} className="grid grid-rows-4 gap-1">
-                        {(yearData.months[month]?.weeks || Array(4).fill('away')).map((status, weekIndex) => (
-                          <div
-                            key={`${yearData.year}-${month}-${weekIndex}`}
-                            className={`aspect-square rounded ${getStatusColor(status)} p-1 flex items-center justify-center`}
-                          >
-                            <span className="text-[8px] text-white font-medium leading-none">
-                              {getWeekStartDate(yearData.year, month, weekIndex)}
-                            </span>
-                          </div>
-                        ))}
+                        {(yearData.months[month]?.weeks || Array(4).fill('away')).map((status, weekIndex) => {
+                          const weekDate = getWeekStartDate(yearData.year, month, weekIndex);
+                          const currentWeek = isCurrentWeek(weekDate);
+                          
+                          return (
+                            <div
+                              key={`${yearData.year}-${month}-${weekIndex}`}
+                              className={`aspect-square rounded ${getStatusColor(status, currentWeek)} p-1 flex items-center justify-center`}
+                            >
+                              <span className="text-[8px] text-white font-medium leading-none">
+                                {weekDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                              </span>
+                            </div>
+                          );
+                        })}
                       </div>
                     ))}
                   </div>
