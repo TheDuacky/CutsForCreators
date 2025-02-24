@@ -2,12 +2,6 @@
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Circle, CircleSlash, AlertCircle } from "lucide-react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { activityData, ActivityStatus } from '../data/activity-data';
 
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -74,20 +68,14 @@ const ActivityBoard = () => {
                     {months.map((month) => (
                       <div key={`${yearData.year}-${month}`} className="grid grid-rows-4 gap-1">
                         {(yearData.months[month]?.weeks || Array(4).fill('away')).map((status, weekIndex) => (
-                          <TooltipProvider key={`${yearData.year}-${month}-${weekIndex}`}>
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <div
-                                  className={`aspect-square rounded ${getStatusColor(status)} cursor-help`}
-                                />
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <div className="text-sm">
-                                  Week of {getWeekStartDate(yearData.year, month, weekIndex)}
-                                </div>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
+                          <div
+                            key={`${yearData.year}-${month}-${weekIndex}`}
+                            className={`aspect-square rounded ${getStatusColor(status)} p-1 flex items-center justify-center`}
+                          >
+                            <span className="text-[8px] text-white font-medium leading-none">
+                              {getWeekStartDate(yearData.year, month, weekIndex)}
+                            </span>
+                          </div>
                         ))}
                       </div>
                     ))}
