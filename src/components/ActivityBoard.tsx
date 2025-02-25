@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Circle, CircleSlash, AlertCircle, CircleDot } from "lucide-react";
@@ -125,7 +124,7 @@ const ActivityBoard = () => {
                       const paddedWeeks = [...monthData, ...Array(weeksInMonth - monthData.length).fill('away')];
                       
                       return (
-                        <div key={`${yearData.year}-${month}`} className="grid gap-1" style={{ gridTemplateRows: `repeat(${weeksInMonth}, 1fr)` }}>
+                        <div key={`${yearData.year}-${month}`} className="grid gap-1">
                           {paddedWeeks.map((status, weekIndex) => {
                             const weekDate = getWeekStartDate(yearData.year, month, weekIndex);
                             const currentWeek = isCurrentWeek(weekDate);
@@ -133,7 +132,7 @@ const ActivityBoard = () => {
                             return (
                               <div
                                 key={`${yearData.year}-${month}-${weekIndex}`}
-                                className={`aspect-square rounded ${getStatusColor(status, currentWeek)} p-1 flex items-center justify-center`}
+                                className={`h-8 w-full rounded ${getStatusColor(status, currentWeek)} p-1 flex items-center justify-center`}
                               >
                                 <span className="text-[8px] text-white font-medium leading-none">
                                   {weekDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
