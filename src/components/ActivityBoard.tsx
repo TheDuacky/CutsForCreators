@@ -39,6 +39,27 @@ const ActivityBoard = () => {
     return targetDate;
   };
 
+  const getWeeksInMonth = (year: number, month: string) => {
+    const monthIndex = months.indexOf(month);
+    const firstDay = new Date(year, monthIndex, 1);
+    const lastDay = new Date(year, monthIndex + 1, 0);
+    
+    // Find first Monday
+    const firstMonday = new Date(firstDay);
+    while (firstMonday.getDay() !== 1) {
+      firstMonday.setDate(firstMonday.getDate() + 1);
+    }
+    
+    // Find last Monday
+    const lastMonday = new Date(lastDay);
+    while (lastMonday.getDay() !== 1) {
+      lastMonday.setDate(lastMonday.getDate() - 1);
+    }
+    
+    // Calculate number of weeks
+    return Math.ceil((lastMonday.getTime() - firstMonday.getTime()) / (7 * 24 * 60 * 60 * 1000)) + 1;
+  };
+
   const isCurrentWeek = (date: Date) => {
     const today = new Date();
     const currentWeekStart = new Date(today);
@@ -96,25 +117,33 @@ const ActivityBoard = () => {
                 <div key={yearData.year}>
                   <div className="grid grid-cols-[80px_repeat(12,1fr)] gap-1 mb-1">
                     <div className="text-gray-400 text-sm">{yearData.year}</div>
-                    {months.map((month) => (
-                      <div key={`${yearData.year}-${month}`} className="grid grid-rows-4 gap-1">
-                        {(yearData.months[month]?.weeks || Array(4).fill('away')).map((status, weekIndex) => {
-                          const weekDate = getWeekStartDate(yearData.year, month, weekIndex);
-                          const currentWeek = isCurrentWeek(weekDate);
-                          
-                          return (
-                            <div
-                              key={`${yearData.year}-${month}-${weekIndex}`}
-                              className={`aspect-square rounded ${getStatusColor(status, currentWeek)} p-1 flex items-center justify-center`}
-                            >
-                              <span className="text-[8px] text-white font-medium leading-none">
-                                {weekDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                              </span>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    ))}
+                    {months.map((month) => {
+                      const weeksInMonth = getWeeksInMonth(yearData.year, month);
+                      const monthData = yearData.months[month]?.weeks || Array(weeksInMonth).fill('away');
+                      
+                      // Ensure we have enough weeks (pad with 'away' if needed)
+                      const paddedWeeks = [...monthData, ...Array(weeksInMonth - monthData.length).fill('away')];
+                      
+                      return (
+                        <div key={`${yearData.year}-${month}`} className="grid gap-1" style={{ gridTemplateRows: `repeat(${weeksInMonth}, 1fr)` }}>
+                          {paddedWeeks.map((status, weekIndex) => {
+                            const weekDate = getWeekStartDate(yearData.year, month, weekIndex);
+                            const currentWeek = isCurrentWeek(weekDate);
+                            
+                            return (
+                              <div
+                                key={`${yearData.year}-${month}-${weekIndex}`}
+                                className={`aspect-square rounded ${getStatusColor(status, currentWeek)} p-1 flex items-center justify-center`}
+                              >
+                                <span className="text-[8px] text-white font-medium leading-none">
+                                  {weekDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                                </span>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               ))}
