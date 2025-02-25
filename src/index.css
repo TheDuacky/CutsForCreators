@@ -35,6 +35,9 @@
   body {
     @apply bg-background text-foreground;
   }
+  ::selection {
+    @apply bg-purple-500/20 text-purple-900;
+  }
 }
 
 .hero-gradient {
