@@ -124,7 +124,7 @@ const ActivityBoard = () => {
                       const paddedWeeks = [...monthData, ...Array(weeksInMonth - monthData.length).fill('away')];
                       
                       return (
-                        <div key={`${yearData.year}-${month}`} className="grid gap-1">
+                        <div key={`${yearData.year}-${month}`} className="grid gap-1 h-full">
                           {paddedWeeks.map((status, weekIndex) => {
                             const weekDate = getWeekStartDate(yearData.year, month, weekIndex);
                             const currentWeek = isCurrentWeek(weekDate);
@@ -132,7 +132,7 @@ const ActivityBoard = () => {
                             return (
                               <div
                                 key={`${yearData.year}-${month}-${weekIndex}`}
-                                className={`h-8 w-full rounded ${getStatusColor(status, currentWeek)} p-1 flex items-center justify-center`}
+                                className={`aspect-square w-full rounded ${getStatusColor(status, currentWeek)} p-1 flex items-center justify-center`}
                               >
                                 <span className="text-[8px] text-white font-medium leading-none">
                                   {weekDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
