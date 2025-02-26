@@ -1,11 +1,14 @@
+
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { allVideos } from "@/data/creators";
 import { type CarouselApi } from "@/components/ui/carousel";
 import { useEffect, useState, useRef } from "react";
+
 interface WorkedWithSectionProps {
   isPaused: boolean;
   setApi: (api: CarouselApi) => void;
 }
+
 const WorkedWithSection = ({
   isPaused,
   setApi
@@ -14,37 +17,37 @@ const WorkedWithSection = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [translateX, setTranslateX] = useState(0);
   const [lastUpdateTime, setLastUpdateTime] = useState(Date.now());
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
+
     const animate = () => {
       if (isPaused) return;
+      
       const currentTime = Date.now();
       const elapsed = currentTime - lastUpdateTime;
       const speed = 0.015; // Pixels per millisecond
       const newTranslateX = translateX - elapsed * speed;
 
-      // When we reach 75% of the first set, start preparing the next set
-      if (newTranslateX <= -37.5) {
-        // Add new items while keeping existing ones
-        setItems(prevItems => [...prevItems, ...allVideos]);
-        // Reset position while maintaining visual continuity
+      // When we've scrolled past the first set of items
+      if (newTranslateX <= -50) {
+        // Reset position to create seamless loop
         setTranslateX(0);
       } else {
         setTranslateX(newTranslateX);
       }
 
-      // Clean up old items when they're fully off screen
-      if (items.length > allVideos.length * 3) {
-        setItems(prevItems => prevItems.slice(allVideos.length));
-      }
       setLastUpdateTime(currentTime);
     };
+
     const animationFrame = setInterval(animate, 16); // ~60fps
 
     return () => clearInterval(animationFrame);
-  }, [isPaused, translateX, lastUpdateTime, items.length]);
-  return <div className="w-full">
+  }, [isPaused, translateX, lastUpdateTime]);
+
+  return (
+    <div className="w-full">
       <div className="text-center mb-8 mx-[93px] py-[22px]">
         <h2 className="text-3xl md:text-4xl font-bold mb-2 text-white">Worked With</h2>
         <p className="text-gray-300 max-w-2xl mx-auto">
@@ -53,15 +56,23 @@ const WorkedWithSection = ({
       </div>
 
       <div className="relative w-full overflow-hidden">
-        <div ref={containerRef} className="flex" style={{
-        transform: `translateX(${translateX}%)`,
-        width: "300%",
-        // Triple width to allow for seamless looping
-        transition: 'transform 500ms linear' // Smooth transition
-      }}>
-          {items.map((video, index) => <div key={`${video.creator.name}-${index}`} className="flex-none w-1/6 p-4" style={{
-          minWidth: "300px"
-        }}>
+        <div 
+          ref={containerRef} 
+          className="flex" 
+          style={{
+            transform: `translateX(${translateX}%)`,
+            width: "200%", // Double width to accommodate two sets of items
+            transition: 'transform 500ms linear' // Smooth transition
+          }}
+        >
+          {items.map((video, index) => (
+            <div 
+              key={`${video.creator.name}-${index}`} 
+              className="flex-none w-1/6 p-4" 
+              style={{
+                minWidth: "300px"
+              }}
+            >
               <div className="relative group rounded-2xl overflow-hidden bg-[#1A1F2C]/80 border border-purple-500/20 transition-all duration-300 hover:scale-105 hover:border-purple-500/50">
                 <div className="p-4 flex items-center gap-3">
                   <a href={video.creator.profileUrl} target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
@@ -89,9 +100,12 @@ const WorkedWithSection = ({
                   </div>
                 </a>
               </div>
-            </div>)}
+            </div>
+          ))}
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default WorkedWithSection;
