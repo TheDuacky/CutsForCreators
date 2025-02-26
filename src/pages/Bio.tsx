@@ -9,45 +9,33 @@ import ActivityBoard from "@/components/ActivityBoard";
 const YOUTUBE_API_KEY = 'YOUR_API_KEY';
 
 // Replace these with your actual video IDs
-const VIDEO_IDS = [
-  'dQw4w9WgXcQ', // Example video ID
-  'jNQXAC9IVRw', // Example video ID
+const VIDEO_IDS = ['dQw4w9WgXcQ',
+// Example video ID
+'jNQXAC9IVRw' // Example video ID
 ];
-
 interface VideoStats {
   viewCount: number;
   channelSubscribers: number;
   videoCount: number;
 }
-
 const fetchVideoStats = async (): Promise<VideoStats> => {
   const stats = {
     viewCount: 0,
     channelSubscribers: 0,
-    videoCount: 0,
+    videoCount: 0
   };
-
   const uniqueChannels = new Set<string>();
-
   for (const videoId of VIDEO_IDS) {
-    const videoResponse = await fetch(
-      `https://www.googleapis.com/youtube/v3/videos?part=statistics,snippet&id=${videoId}&key=${YOUTUBE_API_KEY}`
-    );
+    const videoResponse = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics,snippet&id=${videoId}&key=${YOUTUBE_API_KEY}`);
     const videoData = await videoResponse.json();
-
     if (videoData.items && videoData.items[0]) {
       const video = videoData.items[0];
       stats.viewCount += parseInt(video.statistics.viewCount, 10);
-      
       const channelId = video.snippet.channelId;
       if (!uniqueChannels.has(channelId)) {
         uniqueChannels.add(channelId);
-        
-        const channelResponse = await fetch(
-          `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${YOUTUBE_API_KEY}`
-        );
+        const channelResponse = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${YOUTUBE_API_KEY}`);
         const channelData = await channelResponse.json();
-        
         if (channelData.items && channelData.items[0]) {
           stats.channelSubscribers += parseInt(channelData.items[0].statistics.subscriberCount, 10);
           stats.videoCount += parseInt(channelData.items[0].statistics.videoCount, 10);
@@ -55,25 +43,24 @@ const fetchVideoStats = async (): Promise<VideoStats> => {
       }
     }
   }
-
   return stats;
 };
-
 const Bio = () => {
-  const { data: stats, isLoading } = useQuery({
+  const {
+    data: stats,
+    isLoading
+  } = useQuery({
     queryKey: ['youtubeStats'],
-    queryFn: fetchVideoStats,
+    queryFn: fetchVideoStats
   });
-
-  return (
-    <div className="min-h-screen bg-[#1A1F2C] pt-24 pb-16">
+  return <div className="min-h-screen bg-[#1A1F2C] pt-24 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <Avatar className="w-32 h-32 mx-auto mb-6">
             <AvatarImage src="https://images.unsplash.com/photo-1605810230434-7631ac76ec81" alt="Profile" />
             <AvatarFallback>JD</AvatarFallback>
           </Avatar>
-          <h1 className="text-4xl font-bold text-white mb-4">Jane Doe</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">Duacky</h1>
           <p className="text-xl text-gray-300 mb-6">Video Editor & Content Creator</p>
           <div className="flex justify-center space-x-4">
             <a href="mailto:jane@example.com" className="text-gray-300 hover:text-purple-400">
@@ -143,16 +130,16 @@ const Bio = () => {
                   <ul className="text-gray-300 space-y-2">
                     <li>Adobe Premiere Pro</li>
                     <li>After Effects</li>
-                    <li>DaVinci Resolve</li>
+                    <li>Minecraft Graphics and Cinematic Shots</li>
                     <li>Final Cut Pro</li>
                   </ul>
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-purple-400 mb-2">Specialties</h3>
                   <ul className="text-gray-300 space-y-2">
-                    <li>Motion Graphics</li>
-                    <li>Color Grading</li>
-                    <li>Sound Design</li>
+                    <li>Video Essays</li>
+                    <li>Minecraft</li>
+                    <li>Stylized Films</li>
                     <li>Visual Effects</li>
                   </ul>
                 </div>
@@ -179,8 +166,6 @@ const Bio = () => {
           </Card>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Bio;
