@@ -1,3 +1,4 @@
+
 import { Play, Pause } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
@@ -25,7 +26,7 @@ const HeroSection = ({
         <h1 className="text-4xl md:text-6xl font-bold mb-6">
           Level Up Your
           <br />
-          <div className="min-h-[100px] relative overflow-visible">
+          <div className="h-[100px] relative overflow-hidden">
             <div 
               className="transform transition-transform duration-500 ease-in-out absolute left-0"
               style={{ 
@@ -37,7 +38,7 @@ const HeroSection = ({
                 contentTypes.map((type) => (
                   <div 
                     key={`${type.id}-${rotation}`}
-                    className="min-h-[100px] flex items-center text-purple-400 whitespace-nowrap"
+                    className="h-[100px] flex items-center text-purple-400 whitespace-nowrap"
                   >
                     {type.title}
                   </div>
