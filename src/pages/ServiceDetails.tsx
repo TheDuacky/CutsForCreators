@@ -27,7 +27,8 @@ const services = {
     ],
     pricing: "$50/minute of final video",
     turnaround: "48-72 hours",
-    deliverables: "Final video in multiple formats (4K, 1080p, Mobile)"
+    deliverables: "Final video in multiple formats (4K, 1080p, Mobile)",
+    type: "individual"
   },
   "youtube-optimization": {
     icon: "Youtube",
@@ -43,7 +44,8 @@ const services = {
     ],
     pricing: "$150/video package",
     turnaround: "24-48 hours",
-    deliverables: "Thumbnail, metadata package, strategy document"
+    deliverables: "Thumbnail, metadata package, strategy document",
+    type: "individual"
   },
   "motion-graphics": {
     icon: "Film",
@@ -59,7 +61,8 @@ const services = {
     ],
     pricing: "$200/project",
     turnaround: "3-5 days",
-    deliverables: "Source files and rendered animations"
+    deliverables: "Source files and rendered animations",
+    type: "individual"
   },
   "content-planning": {
     icon: "Edit",
@@ -75,7 +78,8 @@ const services = {
     ],
     pricing: "$300/month",
     turnaround: "Initial plan within 5 days",
-    deliverables: "Monthly content calendar and strategy document"
+    deliverables: "Monthly content calendar and strategy document",
+    type: "individual"
   },
   "special-effects": {
     icon: "Wand2",
@@ -91,7 +95,8 @@ const services = {
     ],
     pricing: "$100/effect",
     turnaround: "3-7 days",
-    deliverables: "Rendered effects and composited footage"
+    deliverables: "Rendered effects and composited footage",
+    type: "individual"
   },
   "analytics-review": {
     icon: "BarChart",
@@ -107,7 +112,62 @@ const services = {
     ],
     pricing: "$250/review",
     turnaround: "5 days",
-    deliverables: "Comprehensive report and action plan"
+    deliverables: "Comprehensive report and action plan",
+    type: "individual"
+  },
+  "starter-bundle": {
+    icon: "Package",
+    title: "Content Creator Starter Bundle",
+    description: "Everything you need to kickstart your YouTube channel: Video Editing, YouTube Optimization, and Content Planning.",
+    features: [
+      "Professional video editing (up to 10 minutes)",
+      "Custom thumbnail design",
+      "SEO-optimized metadata",
+      "1-month content calendar",
+      "Channel setup guidance",
+      "Dedicated support"
+    ],
+    pricing: "$399/month (20% off individual pricing)",
+    turnaround: "5-7 days for complete package",
+    deliverables: "Edited videos, thumbnails, metadata, and content calendar",
+    type: "bundle",
+    includedServices: ["video-editing", "youtube-optimization", "content-planning"]
+  },
+  "growth-bundle": {
+    icon: "Package",
+    title: "Professional Growth Bundle",
+    description: "Take your channel to the next level with Analytics Review, Motion Graphics, and Special Effects.",
+    features: [
+      "Monthly analytics review and recommendations",
+      "Custom motion graphics (intro, outro, lower thirds)",
+      "3 special effects per month",
+      "Growth strategy session",
+      "Technical optimization",
+      "Priority support"
+    ],
+    pricing: "$549/month (25% off individual pricing)",
+    turnaround: "7-10 days for initial setup, then ongoing",
+    deliverables: "Analytics report, custom graphics package, special effects",
+    type: "bundle",
+    includedServices: ["analytics-review", "motion-graphics", "special-effects"]
+  },
+  "ultimate-bundle": {
+    icon: "Package",
+    title: "Ultimate Creator Bundle",
+    description: "All our services combined for a comprehensive content creation solution at a discounted rate.",
+    features: [
+      "Professional video editing (unlimited minutes)",
+      "Complete YouTube channel optimization",
+      "Custom motion graphics and special effects",
+      "Comprehensive content planning",
+      "Monthly analytics and strategy review",
+      "VIP priority support"
+    ],
+    pricing: "$999/month (30% off individual pricing)",
+    turnaround: "Priority processing for all deliverables",
+    deliverables: "All-inclusive content creation package with priority service",
+    type: "bundle",
+    includedServices: ["video-editing", "youtube-optimization", "motion-graphics", "content-planning", "special-effects", "analytics-review"]
   }
 };
 
@@ -188,6 +248,42 @@ const portfolioItems = {
       image: "https://images.unsplash.com/photo-1518770660439-4636190af475",
       description: "Optimized content suggestions"
     },
+  ],
+  "starter-bundle": [
+    {
+      title: "Starter Bundle Example",
+      image: "https://images.unsplash.com/photo-1579567761406-4684ee0c75b6",
+      description: "Complete channel transformation with the Starter Bundle."
+    },
+    {
+      title: "Beginner Growth Results",
+      image: "https://images.unsplash.com/photo-1533750516457-a7f992034fec",
+      description: "Channel growth results after 3 months with the Starter Bundle."
+    },
+  ],
+  "growth-bundle": [
+    {
+      title: "Professional Transformation",
+      image: "https://images.unsplash.com/photo-1612299065617-f883adb67bd1",
+      description: "Before and after comparison of a channel using the Growth Bundle."
+    },
+    {
+      title: "Advanced Effects Demo",
+      image: "https://images.unsplash.com/photo-1596443686812-2f45229eebc3",
+      description: "Showcase of special effects and motion graphics included in the Growth Bundle."
+    },
+  ],
+  "ultimate-bundle": [
+    {
+      title: "Ultimate Creator Success",
+      image: "https://images.unsplash.com/photo-1487528278747-ba99ed528ebc",
+      description: "Case study of a creator who achieved massive growth with the Ultimate Bundle."
+    },
+    {
+      title: "Full Production Quality",
+      image: "https://images.unsplash.com/photo-1580130732078-f80ffb84a05c",
+      description: "Professional-grade content created with the Ultimate Bundle package."
+    },
   ]
 };
 
@@ -210,6 +306,8 @@ const ServiceDetails = () => {
     );
   }
 
+  const isBundle = service.type === "bundle";
+
   return (
     <div className="min-h-screen bg-[#1A1F2C] pt-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -223,6 +321,11 @@ const ServiceDetails = () => {
 
         <div className="space-y-12">
           <div className="text-center max-w-3xl mx-auto">
+            {isBundle && (
+              <span className="inline-block px-3 py-1 bg-purple-600 text-white text-xs font-semibold rounded-full mb-4">
+                Bundle
+              </span>
+            )}
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">{service.title}</h1>
             <p className="text-xl text-gray-300">{service.description}</p>
           </div>
@@ -273,6 +376,30 @@ const ServiceDetails = () => {
                     </div>
                   ))}
                 </div>
+
+                {isBundle && service.includedServices && (
+                  <div className="mt-8 pt-8 border-t border-purple-500/20">
+                    <h3 className="text-xl font-semibold mb-6 text-white">Included Services</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {service.includedServices.map((serviceId) => {
+                        const includedService = services[serviceId as keyof typeof services];
+                        return includedService ? (
+                          <div 
+                            key={serviceId} 
+                            className="p-4 rounded-lg border border-purple-500/20 bg-[#1A1F2C] cursor-pointer hover:border-purple-500/40 transition-all"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              navigate(`/services/${serviceId}`);
+                            }}
+                          >
+                            <h4 className="text-white font-medium mb-2">{includedService.title}</h4>
+                            <p className="text-gray-400 text-sm">{includedService.description}</p>
+                          </div>
+                        ) : null;
+                      })}
+                    </div>
+                  </div>
+                )}
               </CardContent>
             </Card>
 

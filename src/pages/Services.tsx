@@ -1,48 +1,86 @@
-import { Video, Youtube, Film, Edit, Wand2, BarChart } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
+import { Video, Youtube, Film, Edit, Wand2, BarChart, Package } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+
+// Updated services array with type field
 const services = [
   {
     icon: <Video size={32} className="text-purple-400" />,
     title: "Video Editing",
     description: "Professional editing with smooth transitions, color grading, and sound design.",
-    id: "video-editing"
+    id: "video-editing",
+    type: "individual"
   },
   {
     icon: <Youtube size={32} className="text-purple-400" />,
     title: "YouTube Optimization",
     description: "Thumbnail creation, title optimization, and content strategy.",
-    id: "youtube-optimization"
+    id: "youtube-optimization",
+    type: "individual"
   },
   {
     icon: <Film size={32} className="text-purple-400" />,
     title: "Motion Graphics",
     description: "Custom animations and visual effects to enhance your content.",
-    id: "motion-graphics"
+    id: "motion-graphics",
+    type: "individual"
   },
   {
     icon: <Edit size={32} className="text-purple-400" />,
     title: "Content Planning",
     description: "Strategic planning and content calendar management.",
-    id: "content-planning"
+    id: "content-planning",
+    type: "individual"
   },
   {
     icon: <Wand2 size={32} className="text-purple-400" />,
     title: "Special Effects",
     description: "High-quality VFX and creative transitions for engaging content.",
-    id: "special-effects"
+    id: "special-effects",
+    type: "individual"
   },
   {
     icon: <BarChart size={32} className="text-purple-400" />,
     title: "Analytics Review",
     description: "Data-driven insights to improve your channel's performance.",
-    id: "analytics-review"
+    id: "analytics-review",
+    type: "individual"
+  },
+  {
+    icon: <Package size={32} className="text-purple-400" />,
+    title: "Content Creator Starter Bundle",
+    description: "Everything you need to kickstart your YouTube channel: Video Editing, YouTube Optimization, and Content Planning.",
+    id: "starter-bundle",
+    type: "bundle"
+  },
+  {
+    icon: <Package size={32} className="text-purple-400" />,
+    title: "Professional Growth Bundle",
+    description: "Take your channel to the next level with Analytics Review, Motion Graphics, and Special Effects.",
+    id: "growth-bundle",
+    type: "bundle"
+  },
+  {
+    icon: <Package size={32} className="text-purple-400" />,
+    title: "Ultimate Creator Bundle",
+    description: "All our services combined for a comprehensive content creation solution at a discounted rate.",
+    id: "ultimate-bundle",
+    type: "bundle"
   }
 ];
 
 const Services = () => {
   const navigate = useNavigate();
+  const [showBundles, setShowBundles] = useState(false);
+  const [filteredServices, setFilteredServices] = useState(services.filter(service => service.type === "individual"));
+
+  // Update filtered services when toggle changes
+  useEffect(() => {
+    setFilteredServices(services.filter(service => service.type === (showBundles ? "bundle" : "individual")));
+  }, [showBundles]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -95,8 +133,30 @@ const Services = () => {
           </p>
         </div>
         
+        {/* Toggle Switch */}
+        <div className="flex items-center justify-center gap-4 mb-12">
+          <Label 
+            htmlFor="service-toggle" 
+            className={`text-lg font-medium cursor-pointer ${!showBundles ? 'text-purple-400' : 'text-gray-400'}`}
+          >
+            Individual Services
+          </Label>
+          <Switch 
+            id="service-toggle" 
+            checked={showBundles}
+            onCheckedChange={setShowBundles}
+            className="data-[state=checked]:bg-purple-600"
+          />
+          <Label 
+            htmlFor="service-toggle" 
+            className={`text-lg font-medium cursor-pointer ${showBundles ? 'text-purple-400' : 'text-gray-400'}`}
+          >
+            Service Bundles
+          </Label>
+        </div>
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
+          {filteredServices.map((service, index) => (
             <div
               key={service.id}
               onClick={() => navigate(`/services/${service.id}`)}
