@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
 
 // Updated services array with type field
 const services = [
@@ -76,11 +78,21 @@ const Services = () => {
   const navigate = useNavigate();
   const [showBundles, setShowBundles] = useState(false);
   const [filteredServices, setFilteredServices] = useState(services.filter(service => service.type === "individual"));
+  const { toast } = useToast();
 
   // Update filtered services when toggle changes
   useEffect(() => {
     setFilteredServices(services.filter(service => service.type === (showBundles ? "bundle" : "individual")));
-  }, [showBundles]);
+    
+    // Show toast notification when switching between service types
+    toast({
+      title: showBundles ? "Showing Service Bundles" : "Showing Individual Services",
+      description: showBundles 
+        ? "These bundles combine multiple services at a discounted rate" 
+        : "These are our standalone professional services",
+      duration: 3000,
+    });
+  }, [showBundles, toast]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -162,6 +174,13 @@ const Services = () => {
               onClick={() => navigate(`/services/${service.id}`)}
               className="group relative p-6 rounded-lg border border-purple-500/20 hover:border-purple-500/40 transition-all duration-500 ease-out cursor-pointer bg-[#232836]/50 backdrop-blur-sm hover:transform hover:translate-y-[-4px]"
             >
+              {/* Bundle Indicator */}
+              {service.type === "bundle" && (
+                <Badge className="absolute top-4 right-4 bg-purple-600 hover:bg-purple-700 px-3 py-1 text-xs font-semibold animate-pulse">
+                  Bundle
+                </Badge>
+              )}
+              
               {/* Holographic layers */}
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 rounded-lg" style={{ transform: 'translateZ(20px)' }} />
               <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-100 rounded-lg" style={{ transform: 'translateZ(40px)' }} />
