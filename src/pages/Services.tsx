@@ -1,13 +1,10 @@
 
 import { Video, Youtube, Film, Edit, Wand2, BarChart, Package } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
+import { useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
-import { useToast } from "@/hooks/use-toast";
 
-// Updated services array with type field
+// Services array with type field
 const services = [
   {
     icon: <Video size={32} className="text-purple-400" />,
@@ -76,23 +73,6 @@ const services = [
 
 const Services = () => {
   const navigate = useNavigate();
-  const [showBundles, setShowBundles] = useState(false);
-  const [filteredServices, setFilteredServices] = useState(services.filter(service => service.type === "individual"));
-  const { toast } = useToast();
-
-  // Update filtered services when toggle changes
-  useEffect(() => {
-    setFilteredServices(services.filter(service => service.type === (showBundles ? "bundle" : "individual")));
-    
-    // Show toast notification when switching between service types
-    toast({
-      title: showBundles ? "Showing Service Bundles" : "Showing Individual Services",
-      description: showBundles 
-        ? "These bundles combine multiple services at a discounted rate" 
-        : "These are our standalone professional services",
-      duration: 3000,
-    });
-  }, [showBundles, toast]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -145,30 +125,8 @@ const Services = () => {
           </p>
         </div>
         
-        {/* Toggle Switch */}
-        <div className="flex items-center justify-center gap-4 mb-12">
-          <Label 
-            htmlFor="service-toggle" 
-            className={`text-lg font-medium cursor-pointer ${!showBundles ? 'text-purple-400' : 'text-gray-400'}`}
-          >
-            Individual Services
-          </Label>
-          <Switch 
-            id="service-toggle" 
-            checked={showBundles}
-            onCheckedChange={setShowBundles}
-            className="data-[state=checked]:bg-purple-600"
-          />
-          <Label 
-            htmlFor="service-toggle" 
-            className={`text-lg font-medium cursor-pointer ${showBundles ? 'text-purple-400' : 'text-gray-400'}`}
-          >
-            Service Bundles
-          </Label>
-        </div>
-        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredServices.map((service, index) => (
+          {services.map((service) => (
             <div
               key={service.id}
               onClick={() => navigate(`/services/${service.id}`)}
