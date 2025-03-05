@@ -5,6 +5,8 @@ import { ArrowLeft, CheckCircle, Clock, Package, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import ServiceGallery from '@/components/services/ServiceGallery';
+import { galleryData } from '@/data/gallery-data';
 
 // Define service data with more detailed information
 const serviceData = [
@@ -170,6 +172,7 @@ const ServiceDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const serviceInfo = serviceData.find(service => service.id === id);
+  const galleryItems = id ? galleryData[id] || [] : [];
 
   useEffect(() => {
     // Scroll to top when component mounts
@@ -224,6 +227,11 @@ const ServiceDetails = () => {
             </div>
             
             <p className="text-gray-300 text-lg mb-8">{serviceInfo.description}</p>
+            
+            {/* Gallery Section */}
+            {galleryItems.length > 0 && (
+              <ServiceGallery items={galleryItems} serviceTitle={serviceInfo.title} />
+            )}
             
             <div className="bg-[#232836]/50 backdrop-blur-sm border border-purple-500/20 rounded-lg p-6 mb-8">
               <h2 className="text-xl font-semibold text-white mb-4">Key Features</h2>
