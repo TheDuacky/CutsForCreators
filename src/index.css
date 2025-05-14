@@ -52,11 +52,12 @@
 .bg-radial-gradient {
   background: radial-gradient(circle at center, rgba(155, 135, 245, 0.15) 0%, transparent 70%);
   pointer-events: none;
+  position: fixed; /* Make it fixed to cover all scrollable content */
 }
 
 /* Floating Gradient Orbs */
 .gradient-orb {
-  position: absolute;
+  position: fixed; /* Changed from absolute to fixed for seamless effect */
   border-radius: 50%;
   filter: blur(80px);
   opacity: 0.2;
@@ -111,7 +112,7 @@
 
 /* Animated Line Decoration */
 .gradient-line {
-  position: absolute;
+  position: fixed; /* Changed from absolute to fixed to span the full document */
   width: 2px;
   height: 150px;
   background: linear-gradient(180deg, var(--color-primary) 0%, transparent);
@@ -177,4 +178,3 @@ main {
   overflow-x: hidden;
   width: 100%;
 }
-

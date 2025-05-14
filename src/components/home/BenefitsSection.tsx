@@ -21,13 +21,7 @@ const benefits = [
 
 const BenefitsSection = () => {
   return (
-    <section className="py-20 relative overflow-visible">
-      {/* Background Gradient Elements */}
-      <div className="absolute inset-0 z-0 overflow-visible">
-        <div className="w-full h-[150%] absolute -top-[25%] bg-gradient-to-br from-purple-600/30 via-indigo-500/20 to-fuchsia-500/30 blur-2xl transform-gpu opacity-70"></div>
-        <div className="w-2/3 h-[200%] absolute -bottom-[50%] left-1/2 -translate-x-1/2 bg-gradient-to-t from-purple-800/40 to-transparent rounded-full blur-3xl transform-gpu"></div>
-      </div>
-
+    <section className="py-20 relative overflow-visible bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
@@ -42,7 +36,7 @@ const BenefitsSection = () => {
           {benefits.map((benefit, index) => (
             <div 
               key={benefit.title}
-              className="group relative bg-[#1A1F2C]/80 border border-purple-500/20 rounded-2xl p-6 hover:border-purple-500/40 transition-all duration-300"
+              className="group relative bg-[#1A1F2C]/80 border border-purple-500/20 rounded-2xl p-6 hover:border-purple-500/40 transition-all duration-300 backdrop-blur-sm"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
               <div className="relative z-10">

@@ -7,7 +7,7 @@ const WorkedWithSection = () => {
   const displayedVideos = allVideos.slice(0, 4);
 
   return (
-    <div className="w-full py-10 bg-[#1A1F2C] text-white relative overflow-hidden">
+    <div className="w-full py-10 bg-transparent text-white relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold mb-2 text-white">Trusted by Creators</h2>
@@ -24,7 +24,7 @@ const WorkedWithSection = () => {
               href={video.creator.profileUrl}
               target="_blank" 
               rel="noopener noreferrer"
-              className="bg-[#222632] rounded-lg overflow-hidden transition-all duration-300 hover:bg-[#252A37] border border-[#333845]"
+              className="bg-[#222632]/50 backdrop-blur-sm rounded-lg overflow-hidden transition-all duration-300 hover:bg-[#252A37]/70 border border-[#333845]"
             >
               <div className="p-3 flex items-center gap-2">
                 <Avatar className="w-6 h-6 border border-[#333845]">
