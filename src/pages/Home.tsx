@@ -62,14 +62,20 @@ const Home = () => {
         style={{ transform: `scaleX(${scrollProgress / 100})` }} 
       />
 
+      {/* Extended Hero Background Gradient that covers the entire page */}
+      <div className="absolute inset-0 w-full h-full z-0">
+        <div className="w-full h-[300%] absolute top-0 bg-gradient-to-b from-purple-600/30 via-indigo-500/20 to-transparent blur-3xl transform-gpu opacity-70"></div>
+        <div className="w-2/3 h-[200%] absolute top-[10%] left-1/2 -translate-x-1/2 bg-gradient-to-b from-purple-800/40 to-transparent rounded-full blur-3xl transform-gpu"></div>
+      </div>
+
       {/* Gradient Orbs with extended reach */}
-      <div className="gradient-orb gradient-orb-1" style={{ height: '400px', width: '400px' }} />
-      <div className="gradient-orb gradient-orb-2" style={{ height: '350px', width: '350px' }} />
-      <div className="gradient-orb gradient-orb-3" style={{ height: '300px', width: '300px' }} />
+      <div className="gradient-orb gradient-orb-1" style={{ height: '500px', width: '500px' }} />
+      <div className="gradient-orb gradient-orb-2" style={{ height: '450px', width: '450px' }} />
+      <div className="gradient-orb gradient-orb-3" style={{ height: '400px', width: '400px' }} />
 
       {/* Gradient Lines with increased length */}
-      <div className="gradient-line" style={{ left: '10%', height: '300px' }} />
-      <div className="gradient-line" style={{ right: '10%', height: '300px' }} />
+      <div className="gradient-line" style={{ left: '10%', height: '500px' }} />
+      <div className="gradient-line" style={{ right: '10%', height: '500px' }} />
 
       <HeroSection 
         currentDescription={currentDescription}
