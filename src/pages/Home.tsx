@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { contentTypes, CAROUSEL_INTERVAL } from "@/data/content-types";
 import { type CarouselApi } from "@/components/ui/carousel";
@@ -82,12 +81,6 @@ const Home = () => {
       <WorkedWithSection />
 
       <BenefitsSection />
-
-      {/* Bottom Gradient Element */}
-      <div className="relative h-36 overflow-hidden bg-[#1A1F2C]">
-        <div className="w-full h-full absolute bottom-0 bg-gradient-to-br from-purple-600/30 via-indigo-500/20 to-fuchsia-500/30 blur-2xl transform-gpu opacity-70"></div>
-        <div className="w-2/3 h-full absolute -bottom-10 left-1/2 -translate-x-1/2 bg-gradient-to-t from-purple-800/40 to-transparent rounded-full blur-3xl transform-gpu"></div>
-      </div>
     </div>
   );
 };
