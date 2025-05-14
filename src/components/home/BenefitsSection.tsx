@@ -51,14 +51,24 @@ const BenefitsSection = () => {
                     <div className="flex items-center mb-3">
                       {benefit.icon}
                     </div>
-                    <div className="inline-block bg-green-500/10 px-2 py-1 rounded text-xs text-green-500 mb-2">
-                      Trustpilot
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="inline-block bg-green-500/10 px-2 py-1 rounded text-xs text-green-500">
+                        Trustpilot
+                      </div>
+                      <div className="text-xs text-green-500">
+                        Verified Review
+                      </div>
                     </div>
                     <div className="text-sm text-gray-400 italic mb-2">
-                      "The editing service completely transformed our content. Highly recommended!"
+                      "We've been using this editing service for all our marketing content. The turnaround time is impressive and the quality is consistently excellent!"
                     </div>
-                    <div className="text-xs text-gray-500">
-                      - Sarah J., Marketing Director
+                    <div className="flex justify-between items-center">
+                      <div className="text-xs text-gray-500">
+                        - Michael T., Content Manager
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        Posted 2 weeks ago
+                      </div>
                     </div>
                   </div>
                 ) : (
