@@ -62,14 +62,20 @@ const Home = () => {
         style={{ transform: `scaleX(${scrollProgress / 100})` }} 
       />
 
+      {/* Site-wide background gradient */}
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#1A1F2C] to-[#2A2F3C] z-0" />
+      
+      {/* Extended radial overlay */}
+      <div className="absolute inset-0 w-full h-full bg-radial-gradient z-0" />
+
       {/* Gradient Orbs with extended reach */}
-      <div className="gradient-orb gradient-orb-1" style={{ height: '400px', width: '400px' }} />
-      <div className="gradient-orb gradient-orb-2" style={{ height: '350px', width: '350px' }} />
-      <div className="gradient-orb gradient-orb-3" style={{ height: '300px', width: '300px' }} />
+      <div className="gradient-orb gradient-orb-1" style={{ height: '600px', width: '600px' }} />
+      <div className="gradient-orb gradient-orb-2" style={{ height: '550px', width: '550px' }} />
+      <div className="gradient-orb gradient-orb-3" style={{ height: '500px', width: '500px' }} />
 
       {/* Gradient Lines with increased length */}
-      <div className="gradient-line" style={{ left: '10%', height: '300px' }} />
-      <div className="gradient-line" style={{ right: '10%', height: '300px' }} />
+      <div className="gradient-line" style={{ left: '10%', height: '800px' }} />
+      <div className="gradient-line" style={{ right: '10%', height: '800px' }} />
 
       <HeroSection 
         currentDescription={currentDescription}
