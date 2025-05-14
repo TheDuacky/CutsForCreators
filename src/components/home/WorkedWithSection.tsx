@@ -7,7 +7,7 @@ const WorkedWithSection = () => {
   const displayedVideos = allVideos.slice(0, 4);
 
   return (
-    <div className="w-full py-10 bg-[#1A1F2C] text-white relative">
+    <div className="w-full py-10 bg-[#1A1F2C] text-white relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-8">
           <h2 className="text-2xl font-bold mb-2 text-white">Trusted by Creators</h2>
