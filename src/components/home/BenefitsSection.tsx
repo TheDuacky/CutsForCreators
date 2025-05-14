@@ -21,11 +21,11 @@ const benefits = [
 
 const BenefitsSection = () => {
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-20 relative overflow-visible">
       {/* Background Gradient Elements */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="w-full h-full absolute bottom-0 bg-gradient-to-br from-purple-600/30 via-indigo-500/20 to-fuchsia-500/30 blur-2xl transform-gpu opacity-70"></div>
-        <div className="w-2/3 h-full absolute -bottom-10 left-1/2 -translate-x-1/2 bg-gradient-to-t from-purple-800/40 to-transparent rounded-full blur-3xl transform-gpu"></div>
+      <div className="absolute inset-0 z-0 overflow-visible">
+        <div className="w-full h-[150%] absolute -top-[25%] bg-gradient-to-br from-purple-600/30 via-indigo-500/20 to-fuchsia-500/30 blur-2xl transform-gpu opacity-70"></div>
+        <div className="w-2/3 h-[200%] absolute -bottom-[50%] left-1/2 -translate-x-1/2 bg-gradient-to-t from-purple-800/40 to-transparent rounded-full blur-3xl transform-gpu"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

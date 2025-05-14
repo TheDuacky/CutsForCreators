@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { contentTypes, CAROUSEL_INTERVAL } from "@/data/content-types";
 import { type CarouselApi } from "@/components/ui/carousel";
@@ -54,21 +55,21 @@ const Home = () => {
   const totalOffset = (totalRotations * contentTypes.length + currentContentIndex) * 100;
 
   return (
-    <div className="min-h-screen bg-[#1A1F2C]">
+    <div className="min-h-screen bg-[#1A1F2C] relative overflow-hidden">
       {/* Scroll Progress Indicator */}
       <div 
         className="scroll-progress" 
         style={{ transform: `scaleX(${scrollProgress / 100})` }} 
       />
 
-      {/* Gradient Orbs */}
-      <div className="gradient-orb gradient-orb-1" />
-      <div className="gradient-orb gradient-orb-2" />
-      <div className="gradient-orb gradient-orb-3" />
+      {/* Gradient Orbs with extended reach */}
+      <div className="gradient-orb gradient-orb-1" style={{ height: '400px', width: '400px' }} />
+      <div className="gradient-orb gradient-orb-2" style={{ height: '350px', width: '350px' }} />
+      <div className="gradient-orb gradient-orb-3" style={{ height: '300px', width: '300px' }} />
 
-      {/* Gradient Lines */}
-      <div className="gradient-line" style={{ left: '10%' }} />
-      <div className="gradient-line" style={{ right: '10%' }} />
+      {/* Gradient Lines with increased length */}
+      <div className="gradient-line" style={{ left: '10%', height: '300px' }} />
+      <div className="gradient-line" style={{ right: '10%', height: '300px' }} />
 
       <HeroSection 
         currentDescription={currentDescription}
