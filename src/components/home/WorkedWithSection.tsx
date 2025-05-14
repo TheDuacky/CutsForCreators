@@ -39,21 +39,6 @@ const WorkedWithSection = () => {
             </a>
           ))}
         </div>
-        
-        {/* Simplified stats section - more compact */}
-        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
-          {[
-            { label: "Creators", value: "100+" },
-            { label: "Views", value: "500M+" },
-            { label: "Turnaround", value: "48h" },
-            { label: "Satisfaction", value: "95%" }
-          ].map((stat, index) => (
-            <div key={index} className="px-2 py-3 bg-[#222632] rounded-lg border border-[#333845]">
-              <div className="text-sm font-bold text-[#9b87f5] mb-0">{stat.value}</div>
-              <div className="text-[0.65rem] text-[#8E9196]">{stat.label}</div>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   );
