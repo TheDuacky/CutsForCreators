@@ -36,7 +36,7 @@ const BenefitsSection = () => {
           {benefits.map((benefit, index) => (
             <div 
               key={benefit.title}
-              className="group relative bg-[#1A1F2C]/80 border border-purple-500/20 rounded-2xl p-6 hover:border-purple-500/40 transition-all duration-300 backdrop-blur-sm"
+              className="group relative bg-[#1A1F2C]/50 border border-purple-500/10 rounded-2xl p-6 hover:border-purple-500/20 transition-all duration-300 backdrop-blur-sm"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
               <div className="relative z-10">
