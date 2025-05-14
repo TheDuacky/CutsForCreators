@@ -48,26 +48,22 @@ const BenefitsSection = () => {
               <div className="relative z-10">
                 {index === 0 ? (
                   <div className="mb-4">
-                    <div className="flex items-center mb-3">
-                      {benefit.icon}
-                    </div>
-                    <div className="flex items-center gap-2 mb-2">
-                      <div className="inline-block bg-green-500/10 px-2 py-1 rounded text-xs text-green-500">
-                        Trustpilot
+                    <div className="flex flex-col items-center mb-4">
+                      <div className="flex mb-3">
+                        {benefit.icon}
                       </div>
-                      <div className="text-xs text-green-500">
-                        Verified Review
+                      <div className="flex items-center gap-2">
+                        <img 
+                          src="https://cdn.trustpilot.net/brand-assets/1.1.0/logo-white-trustpilot.svg" 
+                          alt="Trustpilot" 
+                          className="h-5 mb-1" 
+                        />
                       </div>
-                    </div>
-                    <div className="text-sm text-gray-400 italic mb-2">
-                      "We've been using this editing service for all our marketing content. The turnaround time is impressive and the quality is consistently excellent!"
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="text-xs text-gray-500">
-                        - Michael T., Content Manager
+                      <div className="text-xs text-gray-300 mt-1">
+                        Based on <span className="font-semibold">100+</span> reviews
                       </div>
-                      <div className="text-xs text-gray-500">
-                        Posted 2 weeks ago
+                      <div className="mt-2 px-3 py-1 bg-green-500/10 rounded-md">
+                        <span className="text-green-500 font-medium text-sm">Excellent</span>
                       </div>
                     </div>
                   </div>
