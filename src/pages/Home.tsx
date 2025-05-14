@@ -79,10 +79,7 @@ const Home = () => {
         totalRotations={totalRotations}
       />
 
-      <WorkedWithSection 
-        isPaused={isPaused}
-        setApi={setApi}
-      />
+      <WorkedWithSection />
 
       <BenefitsSection />
     </div>
