@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { contentTypes, CAROUSEL_INTERVAL } from "@/data/content-types";
 import { type CarouselApi } from "@/components/ui/carousel";
@@ -78,12 +79,10 @@ const Home = () => {
         totalRotations={totalRotations}
       />
 
-      <div className="w-full">
-        <WorkedWithSection 
-          isPaused={isPaused}
-          setApi={setApi}
-        />
-      </div>
+      <WorkedWithSection 
+        isPaused={isPaused}
+        setApi={setApi}
+      />
 
       <BenefitsSection />
     </div>
