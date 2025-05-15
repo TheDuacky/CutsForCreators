@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Youtube, MessageSquare, Copy, Play, Users, Eye } from "lucide-react";
+import { Youtube, Copy, Play, Users, Eye } from "lucide-react";
+import { SiDiscord, SiReddit } from '@icons-pack/react-simple-icons';
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 
@@ -74,10 +75,10 @@ const Bio = () => {
               <Youtube className="w-6 h-6" />
             </a>
             <a href="https://reddit.com/u/duacky" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400">
-              <MessageSquare className="w-6 h-6" />
+              <SiReddit className="w-6 h-6" />
             </a>
             <button onClick={copyDiscordUsername} className="text-gray-300 hover:text-purple-400">
-              <Copy className="w-6 h-6" />
+              <SiDiscord className="w-6 h-6" />
             </button>
           </div>
         </div>
