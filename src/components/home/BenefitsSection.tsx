@@ -1,20 +1,9 @@
-
 import { Target, Users, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const benefits = [
   {
     icon: <div className="flex flex-col items-center w-full">
-            <div className="flex gap-1 mb-3">
-              <Star className="w-5 h-5 text-green-500 fill-green-500" />
-              <Star className="w-5 h-5 text-green-500 fill-green-500" />
-              <Star className="w-5 h-5 text-green-500 fill-green-500" />
-              <Star className="w-5 h-5 text-green-500 fill-green-500" />
-              <Star className="w-5 h-5 text-green-500 fill-green-500" />
-            </div>
-            <div className="text-xs text-gray-300 mb-3">
-              5.0 rating - <span className="font-semibold">Excellent</span>
-            </div>
             <a 
               href="https://www.trustpilot.com/review/cutsforcreators.com" 
               target="_blank" 
