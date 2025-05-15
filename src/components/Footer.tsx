@@ -1,10 +1,16 @@
 
 import { Link } from "react-router-dom";
-import { Mail, MessageSquare, Instagram, Github, Youtube } from "lucide-react";
+import { Copy, Reddit, Youtube } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { toast } from "sonner";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  
+  const copyDiscordUsername = () => {
+    navigator.clipboard.writeText("duacky#1234");
+    toast.success("Discord username copied to clipboard!");
+  };
   
   return (
     <footer className="bg-[#1A1F2C] border-t border-purple-500/20 mt-auto">
@@ -19,15 +25,15 @@ const Footer = () => {
               Professional video editing and content optimization services for YouTube creators.
             </p>
             <div className="flex space-x-4">
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors">
-                <Instagram size={20} />
-              </a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors">
-                <Github size={20} />
-              </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors">
+              <a href="https://youtube.com/@cutsfor.creators" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors">
                 <Youtube size={20} />
               </a>
+              <a href="https://reddit.com/r/cutsforcreators" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors">
+                <Reddit size={20} />
+              </a>
+              <button onClick={copyDiscordUsername} className="text-gray-300 hover:text-purple-400 transition-colors">
+                <Copy size={20} />
+              </button>
             </div>
           </div>
 
@@ -74,16 +80,16 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-white mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-center">
-                <Mail className="w-5 h-5 text-purple-400 mr-2" />
-                <a href="mailto:contact@cutsfor.creators" className="text-gray-300 hover:text-purple-400 transition-colors">
-                  contact@cutsfor.creators
+                <Youtube className="w-5 h-5 text-purple-400 mr-2" />
+                <a href="https://youtube.com/@cutsfor.creators" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors">
+                  YouTube Channel
                 </a>
               </li>
               <li className="flex items-center">
-                <MessageSquare className="w-5 h-5 text-purple-400 mr-2" />
-                <a href="https://discord.gg/example" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors">
-                  Join our Discord
-                </a>
+                <Copy className="w-5 h-5 text-purple-400 mr-2" />
+                <button onClick={copyDiscordUsername} className="text-gray-300 hover:text-purple-400 transition-colors">
+                  Discord: duacky#1234
+                </button>
               </li>
             </ul>
           </div>

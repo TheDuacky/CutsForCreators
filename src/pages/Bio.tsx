@@ -2,8 +2,9 @@
 import { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Mail, Twitter, Linkedin, Globe, Play, Users, Eye } from "lucide-react";
+import { Youtube, Reddit, Copy, Play, Users, Eye } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { toast } from "sonner";
 
 // Replace this with your actual YouTube API key
 const YOUTUBE_API_KEY = 'YOUR_API_KEY';
@@ -53,6 +54,12 @@ const Bio = () => {
     queryKey: ['youtubeStats'],
     queryFn: fetchVideoStats
   });
+
+  const copyDiscordUsername = () => {
+    navigator.clipboard.writeText("duacky#1234");
+    toast.success("Discord username copied to clipboard!");
+  };
+
   return <div className="min-h-screen bg-[#1A1F2C] pt-24 pb-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
@@ -63,18 +70,15 @@ const Bio = () => {
           <h1 className="text-4xl font-bold text-white mb-4">Duacky</h1>
           <p className="text-xl text-gray-300 mb-6">Video Editor & Content Creator</p>
           <div className="flex justify-center space-x-4">
-            <a href="mailto:jane@example.com" className="text-gray-300 hover:text-purple-400">
-              <Mail className="w-6 h-6" />
+            <a href="https://youtube.com/@duacky" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400">
+              <Youtube className="w-6 h-6" />
             </a>
-            <a href="https://twitter.com/jane" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400">
-              <Twitter className="w-6 h-6" />
+            <a href="https://reddit.com/u/duacky" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400">
+              <Reddit className="w-6 h-6" />
             </a>
-            <a href="https://linkedin.com/in/jane" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400">
-              <Linkedin className="w-6 h-6" />
-            </a>
-            <a href="https://jane.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400">
-              <Globe className="w-6 h-6" />
-            </a>
+            <button onClick={copyDiscordUsername} className="text-gray-300 hover:text-purple-400">
+              <Copy className="w-6 h-6" />
+            </button>
           </div>
         </div>
 
