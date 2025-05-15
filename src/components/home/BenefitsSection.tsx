@@ -14,7 +14,7 @@ const benefits = [
             <div className="relative w-full rounded-lg overflow-hidden border border-purple-500/20 bg-black/20 backdrop-blur-sm">
               <div className="aspect-video w-full">
                 <iframe 
-                  src="https://www.trustpilot.com/review/www.trustpilot.com" 
+                  src="https://www.trustpilot.com/review/cutsforcreators.com" 
                   title="Trustpilot reviews" 
                   className="w-full h-full transform scale-[0.8] origin-top"
                   style={{ 
@@ -26,7 +26,7 @@ const benefits = [
               <div className="absolute inset-0 bg-gradient-to-t from-[#1A1F2C]/90 via-transparent to-transparent"></div>
               <div className="absolute bottom-0 left-0 right-0 p-2 flex justify-center items-center">
                 <a 
-                  href="https://www.trustpilot.com" 
+                  href="https://www.trustpilot.com/review/cutsforcreators.com" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center hover:opacity-80 transition-opacity"
