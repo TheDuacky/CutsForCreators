@@ -1,47 +1,39 @@
 
-import { Target, Users, Star } from "lucide-react";
+import { Target, Users, Star, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const benefits = [
   {
     icon: <div className="flex flex-col items-center w-full">
-            <div className="flex gap-1 mb-2">
+            <div className="flex gap-1 mb-3">
               <Star className="w-5 h-5 text-green-500 fill-green-500" />
               <Star className="w-5 h-5 text-green-500 fill-green-500" />
               <Star className="w-5 h-5 text-green-500 fill-green-500" />
               <Star className="w-5 h-5 text-green-500 fill-green-500" />
               <Star className="w-5 h-5 text-green-500 fill-green-500" />
             </div>
-            <div className="relative w-full rounded-lg overflow-hidden border border-purple-500/20 bg-black/20 backdrop-blur-sm">
-              <div className="aspect-video w-full">
-                <iframe 
-                  src="https://www.trustpilot.com/review/cutsforcreators.com" 
-                  title="Trustpilot reviews" 
-                  className="w-full h-full transform scale-[0.8] origin-top"
-                  style={{ 
-                    height: "125%", 
-                    pointerEvents: "none" 
-                  }}
-                />
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1F2C]/90 via-transparent to-transparent"></div>
-              <div className="absolute bottom-0 left-0 right-0 p-2 flex justify-center items-center">
-                <a 
-                  href="https://www.trustpilot.com/review/cutsforcreators.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center hover:opacity-80 transition-opacity"
-                >
-                  <img 
-                    src="https://cdn.trustpilot.net/brand-assets/1.1.0/logo-white-trustpilot.svg" 
-                    alt="Trustpilot" 
-                    className="h-6" 
-                  />
-                </a>
-              </div>
-            </div>
-            <div className="text-xs text-gray-300 mt-2">
+            <div className="text-xs text-gray-300 mb-3">
               5.0 rating - <span className="font-semibold">Excellent</span>
             </div>
+            <a 
+              href="https://www.trustpilot.com/review/cutsforcreators.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-full"
+            >
+              <Button 
+                variant="outline" 
+                className="w-full bg-[#00b67a] hover:bg-[#00a06d] text-white border-none group flex justify-center gap-2 py-5"
+              >
+                <img 
+                  src="https://cdn.trustpilot.net/brand-assets/1.1.0/logo-white-trustpilot.svg" 
+                  alt="Trustpilot" 
+                  className="h-5" 
+                />
+                <span>View our reviews</span>
+                <ExternalLink size={16} className="opacity-70 group-hover:opacity-100 transition-opacity" />
+              </Button>
+            </a>
           </div>,
     title: "Trusted by Customers",
     description: "Check out our reviews from verified customers on Trustpilot"
