@@ -3,7 +3,7 @@ import { Target, Users, Star } from "lucide-react";
 
 const benefits = [
   {
-    icon: <div className="flex flex-col items-center">
+    icon: <div className="flex flex-col items-center w-full">
             <div className="flex gap-1 mb-2">
               <Star className="w-5 h-5 text-green-500 fill-green-500" />
               <Star className="w-5 h-5 text-green-500 fill-green-500" />
@@ -11,18 +11,34 @@ const benefits = [
               <Star className="w-5 h-5 text-green-500 fill-green-500" />
               <Star className="w-5 h-5 text-green-500 fill-green-500" />
             </div>
-            <a 
-              href="https://www.trustpilot.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center hover:opacity-80 transition-opacity"
-            >
-              <img 
-                src="https://cdn.trustpilot.net/brand-assets/1.1.0/logo-white-trustpilot.svg" 
-                alt="Trustpilot" 
-                className="h-6" 
-              />
-            </a>
+            <div className="relative w-full rounded-lg overflow-hidden border border-purple-500/20 bg-black/20 backdrop-blur-sm">
+              <div className="aspect-video w-full">
+                <iframe 
+                  src="https://www.trustpilot.com/review/www.trustpilot.com" 
+                  title="Trustpilot reviews" 
+                  className="w-full h-full transform scale-[0.8] origin-top"
+                  style={{ 
+                    height: "125%", 
+                    pointerEvents: "none" 
+                  }}
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1F2C]/90 via-transparent to-transparent"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-2 flex justify-center items-center">
+                <a 
+                  href="https://www.trustpilot.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center hover:opacity-80 transition-opacity"
+                >
+                  <img 
+                    src="https://cdn.trustpilot.net/brand-assets/1.1.0/logo-white-trustpilot.svg" 
+                    alt="Trustpilot" 
+                    className="h-6" 
+                  />
+                </a>
+              </div>
+            </div>
             <div className="text-xs text-gray-300 mt-2">
               5.0 rating - <span className="font-semibold">Excellent</span>
             </div>
