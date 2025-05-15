@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Copy, Reddit, Youtube } from "lucide-react";
+import { Copy, MessageSquare, Youtube } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
 
@@ -29,7 +29,7 @@ const Footer = () => {
                 <Youtube size={20} />
               </a>
               <a href="https://reddit.com/r/cutsforcreators" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-purple-400 transition-colors">
-                <Reddit size={20} />
+                <MessageSquare size={20} />
               </a>
               <button onClick={copyDiscordUsername} className="text-gray-300 hover:text-purple-400 transition-colors">
                 <Copy size={20} />
