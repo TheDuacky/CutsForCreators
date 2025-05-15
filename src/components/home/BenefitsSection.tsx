@@ -1,17 +1,14 @@
 
 import { Target, Users, Star } from "lucide-react";
+import { useEffect } from "react";
 
 const benefits = [
   {
-    icon: <div className="flex gap-1">
-            <Star className="w-5 h-5 text-green-500 fill-green-500" />
-            <Star className="w-5 h-5 text-green-500 fill-green-500" />
-            <Star className="w-5 h-5 text-green-500 fill-green-500" />
-            <Star className="w-5 h-5 text-green-500 fill-green-500" />
-            <Star className="w-5 h-5 text-green-500 fill-green-500" />
+    icon: <div className="flex items-center justify-center">
+            <div className="w-full" id="trustbox" style={{ minHeight: "120px" }} />
           </div>,
     title: "Trusted by Customers",
-    description: "5.0 average rating from over 100+ reviews on Trustpilot"
+    description: "See our reviews from verified customers on Trustpilot"
   },
   {
     icon: <Target className="w-12 h-12 text-purple-400" />,
@@ -26,6 +23,39 @@ const benefits = [
 ];
 
 const BenefitsSection = () => {
+  useEffect(() => {
+    // Load Trustpilot TrustBox script
+    const trustboxRef = document.getElementById('trustbox');
+    if (trustboxRef && !document.getElementById('trustpilot-script')) {
+      const script = document.createElement('script');
+      script.id = 'trustpilot-script';
+      script.type = 'text/javascript';
+      script.src = 'https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js';
+      script.async = true;
+      
+      script.onload = () => {
+        // Initialize TrustBox once script is loaded
+        if (window.Trustpilot) {
+          window.Trustpilot.loadFromElement(trustboxRef, {
+            businessUnitId: "YOUR_BUSINESS_UNIT_ID", // Replace with your Trustpilot business ID
+            templateId: "5419b6ffb0d04a076446a9af", // MicroStar template - shows mini stars and rating
+            theme: "dark",
+          });
+        }
+      };
+      
+      document.head.appendChild(script);
+    }
+    
+    return () => {
+      // Cleanup script on unmount
+      const scriptElement = document.getElementById('trustpilot-script');
+      if (scriptElement) {
+        scriptElement.remove();
+      }
+    };
+  }, []);
+
   return (
     <section className="py-20 relative overflow-visible bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -48,24 +78,7 @@ const BenefitsSection = () => {
               <div className="relative z-10">
                 {index === 0 ? (
                   <div className="mb-4">
-                    <div className="flex flex-col items-center mb-4">
-                      <div className="flex mb-3">
-                        {benefit.icon}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <img 
-                          src="https://cdn.trustpilot.net/brand-assets/1.1.0/logo-white-trustpilot.svg" 
-                          alt="Trustpilot" 
-                          className="h-5 mb-1" 
-                        />
-                      </div>
-                      <div className="text-xs text-gray-300 mt-1">
-                        Based on <span className="font-semibold">100+</span> reviews
-                      </div>
-                      <div className="mt-2 px-3 py-1 bg-green-500/10 rounded-md">
-                        <span className="text-green-500 font-medium text-sm">Excellent</span>
-                      </div>
-                    </div>
+                    {benefit.icon}
                   </div>
                 ) : (
                   <div className="mb-4 transform group-hover:scale-105 group-hover:rotate-2 transition-all duration-500">
