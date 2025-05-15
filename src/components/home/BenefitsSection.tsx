@@ -25,11 +25,8 @@ const benefits = [
                 variant="outline" 
                 className="w-full bg-[#00b67a] hover:bg-[#00a06d] text-white border-none group flex justify-center gap-2 py-5"
               >
-                <img 
-                  src="https://cdn.trustpilot.net/brand-assets/1.1.0/logo-white-trustpilot.svg" 
-                  alt="Trustpilot" 
-                  className="h-5" 
-                />
+                {/* Replace the external image with styled text for reliability */}
+                <div className="font-bold text-white">Trustpilot</div>
                 <span>View our reviews</span>
                 <ExternalLink size={16} className="opacity-70 group-hover:opacity-100 transition-opacity" />
               </Button>
