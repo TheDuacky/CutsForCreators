@@ -1,3 +1,4 @@
+
 import { Target, Users, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -26,7 +27,7 @@ const benefits = [
   },
   {
     icon: <Target className="w-12 h-12 text-purple-400" />,
-    title: "Targeted Growth",
+    title: "We watch what we make",
     description: "Optimize your content for your specific audience and niche"
   },
   {
