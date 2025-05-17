@@ -1,10 +1,10 @@
 
 import { useEffect, useState } from "react";
 import { 
-  Star, 
+  FileText, 
   Clock, 
   Video, 
-  Users 
+  Award
 } from "lucide-react";
 
 interface StatItem {
@@ -20,40 +20,40 @@ interface StatItem {
 const StatsSection = () => {
   const [stats, setStats] = useState<StatItem[]>([
     {
+      id: "premiere",
+      value: 0,
+      suffix: "+",
+      label: "Years in Adobe Premiere Pro",
+      icon: <Video className="h-6 w-6 text-purple-400" />,
+      increment: 0.2,
+      target: 5
+    },
+    {
+      id: "afterEffects",
+      value: 0,
+      suffix: "+",
+      label: "Years in After Effects",
+      icon: <Award className="h-6 w-6 text-purple-400" />,
+      increment: 0.15,
+      target: 3
+    },
+    {
       id: "projects",
       value: 0,
       suffix: "+",
       label: "Projects Completed",
-      icon: <Video className="h-6 w-6 text-purple-400" />,
-      increment: 10,
-      target: 750
+      icon: <FileText className="h-6 w-6 text-purple-400" />,
+      increment: 5,
+      target: 50
     },
     {
       id: "hours",
       value: 0,
-      suffix: "k+",
+      suffix: "+",
       label: "Hours of Editing",
       icon: <Clock className="h-6 w-6 text-purple-400" />,
-      increment: 0.2,
-      target: 8
-    },
-    {
-      id: "clients",
-      value: 0,
-      suffix: "+",
-      label: "Creators Served",
-      icon: <Users className="h-6 w-6 text-purple-400" />,
-      increment: 5,
-      target: 150
-    },
-    {
-      id: "rating",
-      value: 0,
-      suffix: ".9",
-      label: "Customer Rating",
-      icon: <Star className="h-6 w-6 text-purple-400" />,
-      increment: 0.1,
-      target: 4
+      increment: 20,
+      target: 500
     }
   ]);
 
