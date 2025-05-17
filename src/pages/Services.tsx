@@ -122,7 +122,16 @@ const Services = () => {
 
   return (
     <div className="min-h-screen bg-[#1A1F2C] pt-16 relative overflow-hidden">
-      {/* Removing the decorative elements (circles and lines) from here */}
+      {/* Site-wide background gradient - darkened */}
+      <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#151923] to-[#1E222D] z-0" />
+      
+      {/* Radial overlay with reduced opacity */}
+      <div className="absolute inset-0 w-full h-[200vh] bg-radial-gradient z-0" />
+
+      {/* Gradient Orbs with reduced opacity */}
+      <div className="gradient-orb gradient-orb-1" style={{ height: '800px', width: '800px', opacity: '0.12' }} />
+      <div className="gradient-orb gradient-orb-2" style={{ height: '700px', width: '700px', opacity: '0.08' }} />
+      <div className="gradient-orb gradient-orb-3" style={{ height: '600px', width: '600px', opacity: '0.1' }} />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div className="text-center mb-16">
