@@ -25,8 +25,8 @@ const StatsSection = () => {
       suffix: "+",
       label: "Hours of Editing",
       icon: <Clock className="h-6 w-6 text-purple-400" />,
-      increment: 20,
-      target: 500
+      increment: 40,
+      target: 1000
     },
     {
       id: "projects",
