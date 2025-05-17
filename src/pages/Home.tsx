@@ -5,6 +5,9 @@ import { type CarouselApi } from "@/components/ui/carousel";
 import HeroSection from "@/components/home/HeroSection";
 import WorkedWithSection from "@/components/home/WorkedWithSection";
 import BenefitsSection from "@/components/home/BenefitsSection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
+import StatsSection from "@/components/home/StatsSection";
+import CallToActionSection from "@/components/home/CallToActionSection";
 
 const Home = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -85,9 +88,15 @@ const Home = () => {
         totalRotations={totalRotations}
       />
 
+      <StatsSection />
+
       <WorkedWithSection />
 
       <BenefitsSection />
+
+      <TestimonialsSection />
+
+      <CallToActionSection />
     </div>
   );
 };
