@@ -29,7 +29,7 @@ const CallToActionSection = () => {
             <Link to="/showreel">
               <Button 
                 variant="outline"
-                className="border-purple-500/40 hover:border-purple-500/70 text-white hover:bg-purple-900/20 px-6 py-6 text-lg"
+                className="border-purple-500/40 hover:border-purple-500/70 text-purple-300 hover:bg-purple-900/20 px-6 py-6 text-lg"
               >
                 Watch Our Showreel
               </Button>

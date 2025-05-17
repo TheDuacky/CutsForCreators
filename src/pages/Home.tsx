@@ -1,11 +1,9 @@
-
 import { useEffect, useState } from "react";
 import { contentTypes, CAROUSEL_INTERVAL } from "@/data/content-types";
 import { type CarouselApi } from "@/components/ui/carousel";
 import HeroSection from "@/components/home/HeroSection";
 import WorkedWithSection from "@/components/home/WorkedWithSection";
 import BenefitsSection from "@/components/home/BenefitsSection";
-import TestimonialsSection from "@/components/home/TestimonialsSection";
 import StatsSection from "@/components/home/StatsSection";
 import CallToActionSection from "@/components/home/CallToActionSection";
 
@@ -93,8 +91,6 @@ const Home = () => {
       <WorkedWithSection />
 
       <BenefitsSection />
-
-      <TestimonialsSection />
 
       <CallToActionSection />
     </div>
