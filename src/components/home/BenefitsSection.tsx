@@ -27,8 +27,8 @@ const benefits = [
   },
   {
     icon: <Eye className="w-12 h-12 text-purple-400" />,
-    title: "We watch what we make",
-    description: "Optimize your content for your specific audience and niche"
+    title: "We Watch What We Make",
+    description: "We watch what we edit, so we know how to make it better"
   },
   {
     icon: <Users className="w-12 h-12 text-purple-400" />,
