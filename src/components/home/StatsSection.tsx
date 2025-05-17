@@ -20,6 +20,24 @@ interface StatItem {
 const StatsSection = () => {
   const [stats, setStats] = useState<StatItem[]>([
     {
+      id: "hours",
+      value: 0,
+      suffix: "+",
+      label: "Hours of Editing",
+      icon: <Clock className="h-6 w-6 text-purple-400" />,
+      increment: 20,
+      target: 500
+    },
+    {
+      id: "projects",
+      value: 0,
+      suffix: "+",
+      label: "Projects Completed",
+      icon: <FileText className="h-6 w-6 text-purple-400" />,
+      increment: 5,
+      target: 50
+    },
+    {
       id: "premiere",
       value: 0,
       suffix: "+",
@@ -36,24 +54,6 @@ const StatsSection = () => {
       icon: <Award className="h-6 w-6 text-purple-400" />,
       increment: 0.15,
       target: 3
-    },
-    {
-      id: "projects",
-      value: 0,
-      suffix: "+",
-      label: "Projects Completed",
-      icon: <FileText className="h-6 w-6 text-purple-400" />,
-      increment: 5,
-      target: 50
-    },
-    {
-      id: "hours",
-      value: 0,
-      suffix: "+",
-      label: "Hours of Editing",
-      icon: <Clock className="h-6 w-6 text-purple-400" />,
-      increment: 20,
-      target: 500
     }
   ]);
 
