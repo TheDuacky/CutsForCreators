@@ -122,29 +122,8 @@ const Services = () => {
 
   return (
     <div className="min-h-screen bg-[#1A1F2C] pt-16 relative overflow-hidden">
-      {/* Abstract Decorations */}
-      <div 
-        className="decoration absolute top-20 left-10 w-64 h-64 rounded-full bg-purple-500/5 blur-3xl transition-all duration-1000 ease-out" 
-        data-speed="0.03" 
-      />
-      <div 
-        className="decoration absolute top-40 right-20 w-96 h-96 rounded-full bg-blue-500/5 blur-3xl transition-all duration-1000 ease-out" 
-        data-speed="0.05" 
-      />
-      <div 
-        className="decoration absolute bottom-20 left-1/4 w-72 h-72 rounded-full bg-pink-500/5 blur-3xl transition-all duration-1000 ease-out" 
-        data-speed="0.04" 
-      />
+      {/* Removing the decorative elements (circles and lines) from here */}
       
-      {/* Animated Lines */}
-      <div className="absolute top-0 left-10 w-[1px] h-full bg-gradient-to-b from-purple-500/20 via-purple-500/10 to-transparent" />
-      <div className="absolute top-0 right-10 w-[1px] h-full bg-gradient-to-b from-purple-500/20 via-purple-500/10 to-transparent" />
-      
-      {/* Floating Elements */}
-      <div className="absolute top-40 left-20 w-4 h-4 rounded-full bg-purple-400/20 animate-[pulse_4s_ease-in-out_infinite]" />
-      <div className="absolute bottom-40 right-20 w-6 h-6 rounded-full bg-blue-400/20 animate-[pulse_5s_ease-in-out_infinite]" />
-      <div className="absolute top-1/2 right-1/3 w-3 h-3 rounded-full bg-pink-400/20 animate-[pulse_6s_ease-in-out_infinite]" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">Our Services</h1>
