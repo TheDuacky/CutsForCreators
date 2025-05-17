@@ -1,5 +1,5 @@
 
-import { Target, Users, Star, ExternalLink } from "lucide-react";
+import { Eye, Users, Star, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const benefits = [
@@ -26,7 +26,7 @@ const benefits = [
     description: "Check out our reviews from verified customers on Trustpilot"
   },
   {
-    icon: <Target className="w-12 h-12 text-purple-400" />,
+    icon: <Eye className="w-12 h-12 text-purple-400" />,
     title: "We watch what we make",
     description: "Optimize your content for your specific audience and niche"
   },
