@@ -6,10 +6,8 @@ const WorkedWithSection = () => {
   return <div className="w-full py-10 bg-transparent text-white relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-8">
-          <h2 className="font-bold mb-2 text-white text-4xl">Trusted by Creators</h2>
-          <p className="max-w-md mx-auto text-gray-300 text-lg">
-            Optimizing content for creators across various platforms
-          </p>
+          <h2 className="font-bold mb-2 text-white text-2xl">Trusted by Creators</h2>
+          
         </div>
 
         {/* Creator cards in a compact grid layout */}
