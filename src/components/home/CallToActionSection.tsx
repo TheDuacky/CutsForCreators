@@ -5,11 +5,11 @@ import { Button } from "@/components/ui/button";
 
 const CallToActionSection = () => {
   return (
-    <section className="py-16 relative overflow-visible bg-transparent">
+    <section className="py-24 relative overflow-visible bg-transparent mb-8">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 backdrop-blur-md border border-purple-500/20 rounded-2xl p-8 md:p-12">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+        <div className="bg-gradient-to-r from-purple-900/30 to-indigo-900/30 backdrop-blur-md border border-purple-500/20 rounded-2xl p-10 md:p-16">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
               Ready to Transform Your Content?
             </h2>
             <p className="text-gray-300 max-w-2xl mx-auto text-lg">
@@ -17,7 +17,7 @@ const CallToActionSection = () => {
             </p>
           </div>
           
-          <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+          <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
             <Link to="/services">
               <Button 
                 className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-6 text-lg"

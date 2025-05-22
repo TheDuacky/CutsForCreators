@@ -81,18 +81,18 @@ const StatsSection = () => {
   }, [stats]);
 
   return (
-    <section className="py-16 relative overflow-visible bg-transparent">
+    <section className="py-24 relative overflow-visible bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {stats.map(stat => (
             <div 
               key={stat.id}
-              className="bg-[#1E2234]/70 backdrop-blur-sm border border-purple-500/10 p-6 rounded-2xl hover:border-purple-500/30 transition-all duration-300 text-center"
+              className="bg-[#1E2234]/70 backdrop-blur-sm border border-purple-500/10 p-8 rounded-2xl hover:border-purple-500/30 transition-all duration-300 text-center"
             >
-              <div className="flex justify-center mb-4">
+              <div className="flex justify-center mb-6">
                 {stat.icon}
               </div>
-              <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+              <div className="text-3xl md:text-4xl font-bold text-white mb-3">
                 {Math.floor(stat.value)}{stat.suffix}
               </div>
               <p className="text-gray-300 text-sm">{stat.label}</p>
