@@ -1,20 +1,15 @@
-
 import { Link } from "react-router-dom";
 import { Copy, Youtube } from "lucide-react";
 import { SiDiscord, SiReddit } from '@icons-pack/react-simple-icons';
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
   const copyDiscordUsername = () => {
     navigator.clipboard.writeText("duacky#1234");
     toast.success("Discord username copied to clipboard!");
   };
-  
-  return (
-    <footer className="bg-[#1A1F2C] border-t border-purple-500/20 mt-auto">
+  return <footer className="bg-[#1A1F2C] border-t border-purple-500/20 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand and description */}
@@ -88,9 +83,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <SiDiscord className="w-5 h-5 text-purple-400 mr-2" />
-                <button onClick={copyDiscordUsername} className="text-gray-300 hover:text-purple-400 transition-colors">
-                  Discord: duacky#1234
-                </button>
+                <button onClick={copyDiscordUsername} className="text-gray-300 hover:text-purple-400 transition-colors">Discord: Duacky</button>
               </li>
             </ul>
           </div>
@@ -112,8 +105,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
